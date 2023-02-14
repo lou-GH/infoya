@@ -1,14 +1,26 @@
-<h2>Sign up</h2>
+<h2>新規会員登録</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+ <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
   <%= render "user/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <p>アカウント名</p>
+    <%= f.text_field :account_name, autofocus: true, id:"inputAccountName",　placeholder: "アカウント名" %>
+  </div>
+
+  <div class="field">
+    <p>メールアドレス</p>
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
+    <p>都道府県</p>
+    <%= = f.collection_select :prefecture, JpPrefecture::Prefecture.all, :name, :name, { include_blank: '都道府県' }, { class: 'custom-select' } %>
+  </div>
+
+  <div class="field">
+    <p>パスワード(6文字以上)</p>
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -17,13 +29,18 @@
   </div>
 
   <div class="field">
+    <p>パスワード(確認用)</p>
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <button type="submit" class="btn btn-success">新規登録</button>
   </div>
 <% end %>
 
-<%= render "user/shared/links" %>
+<h2>既に登録済みの方</h2>
+  <%= link_to new_user_session_path do %>
+    こちら
+  <% end %>
+  からログインしてください。
