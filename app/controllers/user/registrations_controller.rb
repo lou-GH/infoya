@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-class Users::RegistrationsController < Devise::RegistrationsController
+class User::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def after_sign_up_path_for(resource_or_scope)
-    if resource_or_scope.is_a?(Admin)
-      root_path
-    else
-      root_path
-    end
-  end
+  # def after_sign_up_path_for(resource_or_scope)
+    # if resource_or_scope.is_a?(Admin)
+      # root_path
+    # else
+      # root_path
+    # end
+  # end
 
   # GET /resource/sign_up
   def new
@@ -46,11 +47,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:account_name, :prefecture,:user_icon, :is_deleted])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
