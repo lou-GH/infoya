@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class User::SessionsController < Devise::SessionsController
+class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :reject_user, only: [:create]
 
@@ -21,7 +21,7 @@ class User::SessionsController < Devise::SessionsController
 
   protected
 
-  # 退会しているかを判断するメソッド
+ # 退会しているかを判断するメソッド
   def reject_user
     @user = User.find_by(email: params[:user][:email])
     if @user
