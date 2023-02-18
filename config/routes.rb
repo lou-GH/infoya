@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :shop do
-    get 'manufacturers/unsubscribe'
-    get 'manufacturers/withdraw'
-    get 'manufacturers/show'
-    get 'manufacturers/edit'
-    get 'manufacturers/update'
-  end
   #生産者用
   # URL /manufacturers/sign_in ...
   devise_for :manufacturers, skip: [:passwords], controllers: {
@@ -22,4 +15,13 @@ Rails.application.routes.draw do
 
   root 'home#top'
   get 'home/about'
+
+  namespace :shop do
+    get 'manufacturers/unsubscribe'
+    get 'manufacturers/withdraw'
+    get 'manufacturers/my_page', to: 'manufacturers#show'
+    get 'manufacturers/information/edit', to: 'manufacturers#edit'
+    get 'manufacturers/information', to: 'manufacturers#update'
+  end
+
 end

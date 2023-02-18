@@ -61,4 +61,6 @@ gem 'ransack'
 
 gem 'jp_prefecture'
 
+gem 'font-awesome-sass'
+
 

@@ -1,10 +1,5 @@
 class Shop::LocationsController < ApplicationController
 
-  # def index
-    # @location = Location.new
-    # @locations= current_manufacturer.locations
-  # end
-
   def edit
     @location = Location.find(params[:id])
   end
@@ -55,7 +50,7 @@ class Shop::LocationsController < ApplicationController
   private
 
   def location_params
-      params.require(:location).permit(:name, :postal_code, :prefecture, :address, :location_image, :introduction)
+    params.require(:location).permit(:name, :postal_code, :prefecture, :address, :location_image, :introduction)
   end
 
 end

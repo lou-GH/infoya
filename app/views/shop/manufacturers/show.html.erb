@@ -1,2 +1,93 @@
 <div class="container px-5 px-sm-0">
-<h2>マイページ</h2>
+  <h2>マイページ</h2>
+
+  <div class="row">
+
+    <div class="col-md-2">
+      <div class="lead font-weight-bold">生産者登録情報</div>
+    </div>
+
+    <div class="col-md-3">
+      <%= link_to shop_manufacturers_information_edit_path do %>
+        <button type="button" class="btn btn-success">編集する</button>
+      <% end %>
+    </div>
+  </div>
+
+  <div>アイコン画像</div>
+  <%#= image_tag location_image.manufacturer.location.get_location_image(100,100) %>
+
+  <div>アカウント名</div>
+  <%= current_manufacturer.account_name %>
+
+  <div>生産者 説明文</div>
+  <%= current_manufacturer.introduction %>
+
+  <div>メールアドレス</div>
+  <%= current_manufacturer.email %>
+
+  <div>登録地の主な都道府県</div>
+
+
+  <div>
+    <% if current_manufacturer.location_id.present? %>
+    <div>登録地の一覧</div>
+    <% @locations.each do |location| %>
+
+      <div class="row">
+        ●登録地<%#= current_manufacturer.location_id %>
+        <%= link_to edit_location_path(location) do %>
+          <button type="button" class="btn btn-success">編集する</button>
+        <% end %>
+
+        <%= link_to location_path(location), method: :delete, data:{confirm:"この登録地を削除しますか？"} do %>
+          <button type="button" class="btn btn-danger">削除する</button>
+        <% end %>
+      </div>
+
+      <%= location.name %>
+      <%= location.postal_code %>
+      <%= location.prefecture %>
+      <%= location.address %>
+      <%#= location.location_image %>
+
+    <% end %>
+    <% end %>
+
+    <div>登録地の追加</div>
+    <%= form_with model: @location, url: shop_manufacturers_my_page_path do |f| %>
+
+    <div class="col-md-10 offset-md-1">
+      <p>登録地名</p>
+      <label for="inputName"></label>
+      <%= f.text_field :name, autofocus: true, id:"inputName", placeholder: "いんふぉ屋 1号店" %>
+
+      <p>登録地の説明</p>
+      <label for="inputIntroduction"></label>
+      <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder: "2023年に開始した無人販売所です。商品を〇〇個100円で販売しています。料金箱に現金を入れるシステムで電子決済には対応していません。" %>
+
+      <p>イメージ画像</p>
+      <!--<label for="inputLocationImage">LocationImage</label>-->
+      <%#= f.file_field :location_image, placeholder: "イメージ画像", accept: "image/*" %>
+      <i class="fa-regular fa-image"></i>
+
+      <p>郵便番号</p>
+      <label for="inputPostalCode"></label>
+      <%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
+
+      <p>都道府県</p>
+        <%= f.collection_select :prefecture, JpPrefecture::Prefecture.all, :name, :name, { include_blank: '都道府県' }, { class: 'custom-select' } %>
+
+      <p>住所</p>
+      <label for="inputAddress"></label>
+      <%= f.text_field :address, autofocus: true, id:"inputAddress", placeholder: "渋谷区代々木神園町0-0" %>
+
+      <div>
+        <button type="submit" class="btn btn-success">この内容で登録地を追加する</button>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+
+</div>

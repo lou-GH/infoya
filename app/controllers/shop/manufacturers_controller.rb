@@ -12,6 +12,8 @@ class Shop::ManufacturersController < ApplicationController
   end
 
   def show
+    @location = Location.new
+    @locations = current_manufacturer.location_id
   end
 
   def edit
@@ -25,6 +27,7 @@ class Shop::ManufacturersController < ApplicationController
       redirect_to manufacturers_my_page_path
     else
       render :edit
+    end
   end
 
 end
