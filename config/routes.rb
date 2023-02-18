@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  namespace :shop do
+    get 'manufacturers/unsubscribe'
+    get 'manufacturers/withdraw'
+    get 'manufacturers/show'
+    get 'manufacturers/edit'
+    get 'manufacturers/update'
+  end
   #生産者用
   # URL /manufacturers/sign_in ...
   devise_for :manufacturers, skip: [:passwords], controllers: {

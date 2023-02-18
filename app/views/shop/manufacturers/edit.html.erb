@@ -1,0 +1,37 @@
+<%= form_with model: @manufacturer, url: manufacturers_information_path do |f| %>
+
+<div class="container px-5 px-sm-0">
+<h2>生産者情報編集</h2>
+
+<p>生産者アイコン</p>
+<label for="inputManufacturerIcon"></label>
+<%= f.text_field :manufacturer_icon, autofocus: true, id:"inputManufacturerIcon" %>
+
+<p>生産者アカウント名</p>
+<label for="inputAccountName"></label>
+<%= f.text_field :account_name, autofocus: true, id:"inputAccountName",　placeholder: "いんふぉ屋" %>
+
+<p>生産者説明文</p>
+<label for="inputIntroduction"></label>
+<%= f.text_field :introduction, autofocus: true, id:"inputIntroduction", placeholder: "〇〇を生産している農家です。～" %>
+
+<p>メールアドレス</p>
+<label for="inputEmail"></label>
+<%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder: "sample@example.com" %>
+
+<p>登録地の主な都道府県</p>
+
+<div class="row">
+  <div class="col-md-3 offset-md-1">
+    <button type="submit" class="btn btn-success">編集内容を保存</button>
+  </div>
+
+    <% end %>
+
+  <div class="col-md-3 offset-md-2">
+    <%= link_to manufacturers_unsubscribe_path do %>
+      <button type="button" class="btn btn-danger">退会する</button>
+    <% end %>
+  </div>
+</div>
+</div>

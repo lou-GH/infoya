@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_16_133451) do
+ActiveRecord::Schema.define(version: 2023_02_18_114632) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,19 @@ ActiveRecord::Schema.define(version: 2023_02_16_133451) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.integer "manufacturer_id"
+    t.string "name", default: "", null: false
+    t.string "postal_code", default: "", null: false
+    t.string "prefecture", default: "", null: false
+    t.string "address", default: "", null: false
+    t.string "location_image", null: false
+    t.string "introduction", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manufacturer_id"], name: "index_locations_on_manufacturer_id"
+  end
+
   create_table "manufacturers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -53,6 +66,7 @@ ActiveRecord::Schema.define(version: 2023_02_16_133451) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "introduction"
     t.index ["email"], name: "index_manufacturers_on_email", unique: true
     t.index ["location_id"], name: "index_manufacturers_on_location_id"
     t.index ["reset_password_token"], name: "index_manufacturers_on_reset_password_token", unique: true
@@ -70,11 +84,13 @@ ActiveRecord::Schema.define(version: 2023_02_16_133451) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "locations", "manufacturers"
   add_foreign_key "manufacturers", "locations"
 end
