@@ -1,0 +1,11 @@
+<h3>投稿一覧</h3>
+  <ul class="list-group">
+    <% @posts.each do |post| %>
+    <li class="list-group-item">
+      <span class="badge text-danger">
+        <%= link_to "[削除]",posts_destroy_path,method: :delete %>
+      </span>
+      <%= post.introduction %>
+    </li>
+    <% end %>
+  </ul>
