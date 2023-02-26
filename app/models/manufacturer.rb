@@ -8,5 +8,6 @@ class Manufacturer < ApplicationRecord
   include JpPrefecture
 
   has_one_attached :manufacturer_icon
+  has_one_attached :location_image
 
 end

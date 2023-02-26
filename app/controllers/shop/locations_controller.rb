@@ -6,16 +6,17 @@ class Shop::LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_params)
-    @location.customer_id = current_manufacturer.id
+    @location.manufacturer_id = current_manufacturer.id
     if @location.save
       flash[:notice] = "Location was successfully created."
       @locations = current_manufacturer.locations
       # マイページへ
-      redirect_to locations_path
+      redirect_to shop_manufacturers_my_page_path
     else
-      @locations = current_manufacturer.locations
+      @location = Location.new
+      @locations = current_manufacturer.location_id
       # マイページへ
-      render :home
+      render template: "manufacturers/show"
     end
   end
 

@@ -54,8 +54,16 @@
     <% end %>
     <% end %>
 
+
+    <% if @location.errors.any? %>
+      <%= @location.errors.count %>件のエラーが発生しました
+      <% @location.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <% end %>
+
     <div>登録地の追加</div>
-    <%= form_with model: @location, url: shop_manufacturers_my_page_path do |f| %>
+    <%= form_with model: @location, url: shop_locations_path do |f| %>
 
     <div class="col-md-10 offset-md-1">
       <p>登録地名</p>
@@ -67,8 +75,8 @@
       <%= f.text_area :introduction, autofocus: true, id:"inputIntroduction", placeholder: "2023年に開始した無人販売所です。商品を〇〇個100円で販売しています。料金箱に現金を入れるシステムで電子決済には対応していません。" %>
 
       <p>イメージ画像</p>
-      <!--<label for="inputLocationImage">LocationImage</label>-->
-      <%#= f.file_field :location_image, placeholder: "イメージ画像", accept: "image/*" %>
+      <label for="inputLocationImage"></label>
+      <%= f.file_field :location_image, placeholder: "イメージ画像", accept: "image/*" %>
       <i class="fa-regular fa-image"></i>
 
       <p>郵便番号</p>

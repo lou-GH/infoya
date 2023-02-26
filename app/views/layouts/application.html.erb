@@ -32,12 +32,38 @@
             <li class="nav-item">
               <%#= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
             </li>
+
+            <% elsif manufacturer_signed_in? %>
+            <!--manufacturerログインの状態時表示したいheaderのメニュ-->
+              <div class="text-white">
+                ようこそ、<%= current_manufacturer.account_name %>さん！
+              </div>
+
+              <li class="nav-item">
+                <%= link_to shop_my_page_path(current_manufacturer.id), class: 'nav-link text-dark' do %>
+                  マイページ
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%#= link_to items_path, class: 'nav-link text-dark' do %>
+                  <!--投稿一覧-->
+                <%# end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_manufacturer_session_path, method: :delete, class: 'nav-link text-dark' do %>
+                  ログアウト
+                <% end %>
+              </li>
+
             <% else %>
+            <!--ログインしてないときに表示する-->
             <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+              <%= link_to root_path, class: 'nav-link text-dark' do %>
+                Home
+              <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+              <%= link_to "ログイン選択画面", home_about_path, class: 'nav-link text-dark' %>
             </li>
             <% end %>
             </ul>
