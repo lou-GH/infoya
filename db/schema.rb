@@ -42,12 +42,11 @@ ActiveRecord::Schema.define(version: 2023_02_26_122417) do
 
   create_table "locations", force: :cascade do |t|
     t.integer "manufacturer_id"
-    t.string "name", default: "", null: false
-    t.string "postal_code", default: "", null: false
-    t.string "prefecture", default: "", null: false
-    t.string "address", default: "", null: false
-    t.string "location_image", null: false
-    t.string "introduction", default: "", null: false
+    t.string "name", null: false
+    t.string "postal_code", null: false
+    t.string "prefecture", null: false
+    t.string "address", null: false
+    t.string "introduction", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["manufacturer_id"], name: "index_locations_on_manufacturer_id"

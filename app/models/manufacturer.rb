@@ -11,5 +11,6 @@ class Manufacturer < ApplicationRecord
   has_one_attached :location_image
 
   has_many :posts
+  has_many :locations
 
 end

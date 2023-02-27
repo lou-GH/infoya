@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   namespace :shop do
     get 'manufacturers/unsubscribe'
     get 'manufacturers/withdraw'
-    get 'manufacturers/my_page', to: 'manufacturers#show', as: :my_page
+    get 'manufacturers/my_page', to: 'manufacturers#show'
     get 'manufacturers/information/edit', to: 'manufacturers#edit'
     get 'manufacturers/information', to: 'manufacturers#update'
 

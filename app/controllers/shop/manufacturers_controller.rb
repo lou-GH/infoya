@@ -13,7 +13,7 @@ class Shop::ManufacturersController < ApplicationController
 
   def show
     @location = Location.new
-    @locations = current_manufacturer.location_id
+    @locations = current_manufacturer.locations
   end
 
   def edit
