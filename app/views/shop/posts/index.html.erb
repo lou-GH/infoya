@@ -1,11 +1,21 @@
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>errors prohibited this obj from being saved:
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+  
 <h3>投稿一覧</h3>
   <ul class="list-group">
     <% @posts.each do |post| %>
-    <li class="list-group-item">
-      <span class="badge text-danger">
-        <%= link_to "[削除]",posts_destroy_path,method: :delete %>
-      </span>
-      <%= post.introduction %>
-    </li>
+      <li class="list-group-item">
+        <span class="badge text-danger">
+          <%= link_to "削除",shop_post_path(post.id)),method: :delete %>
+        </span>
+        <%= image_tag post.post_image %>
+        <%= post.introduction %>
+      </li>
     <% end %>
   </ul>

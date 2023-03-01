@@ -13,7 +13,7 @@ class DeviseCreateManufacturers < ActiveRecord::Migration[6.1]
 
       ## Rememberable
       t.datetime :remember_created_at
-      
+
       ## Trackable
       # t.integer  :sign_in_count, default: 0, null: false
       # t.datetime :current_sign_in_at
@@ -35,8 +35,8 @@ class DeviseCreateManufacturers < ActiveRecord::Migration[6.1]
       t.references :location, foreign_key: true
 
       t.string :account_name, null: false, default: ""
-      t.string :manufacturer_icon
-      t.string :prefecture, null: false, default: ""
+      t.string :introduction, default: ""
+      t.string :prefecture, default: ""
       t.boolean :is_deleted, null: false, default: false
 
       t.timestamps null: false

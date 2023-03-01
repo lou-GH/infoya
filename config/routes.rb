@@ -15,8 +15,6 @@ Rails.application.routes.draw do
 
   root 'home#top'
   get 'home/about'
-  get "posts/index"
-  get "posts/show"
 
   namespace :shop do
     get 'manufacturers/unsubscribe'
@@ -26,7 +24,7 @@ Rails.application.routes.draw do
     get 'manufacturers/information', to: 'manufacturers#update'
 
     resources :locations, only: [:edit, :create, :update, :destroy]
-    resources :posts, only: [:new, :create, :destroy]
+    resources :posts, only: [:index, :new, :show, :create, :destroy]
 
   end
 

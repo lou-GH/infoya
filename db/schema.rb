@@ -60,12 +60,11 @@ ActiveRecord::Schema.define(version: 2023_02_26_122417) do
     t.datetime "remember_created_at"
     t.integer "location_id"
     t.string "account_name", default: "", null: false
-    t.string "manufacturer_icon"
-    t.string "prefecture", default: "", null: false
+    t.string "introduction", default: ""
+    t.string "prefecture", default: ""
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "introduction"
     t.index ["email"], name: "index_manufacturers_on_email", unique: true
     t.index ["location_id"], name: "index_manufacturers_on_location_id"
     t.index ["reset_password_token"], name: "index_manufacturers_on_reset_password_token", unique: true
@@ -76,7 +75,6 @@ ActiveRecord::Schema.define(version: 2023_02_26_122417) do
     t.integer "location_id"
     t.integer "genre_tag_id"
     t.integer "notification_id"
-    t.string "post_image"
     t.string "introduction", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -93,12 +91,11 @@ ActiveRecord::Schema.define(version: 2023_02_26_122417) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "account_name", default: "", null: false
+    t.string "introduction", default: ""
     t.string "prefecture", default: ""
-    t.string "user_icon"
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
