@@ -10,7 +10,7 @@ class Manufacturer < ApplicationRecord
   has_one_attached :manufacturer_icon
   has_one_attached :location_image
 
-  has_many :posts
-  has_many :locations
+  has_many :posts, dependent: :destroy
+  has_many :locations, dependent: :destroy
 
 end

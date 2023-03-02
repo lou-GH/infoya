@@ -3,18 +3,21 @@ class Shop::PostsController < ApplicationController
 before_action :correct_user ,only:[:edit, :update, :destroy]
 
   def index
+    @genre_list = Genre.all
     @post = Post.all
     @manufacturer = current_manufacturer
   end
 
   def new
-    @post = Post.new
+    @post = current_manufacturer.posts.new
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_manufacturer.posts.new(post_params)
     @post.manufacturer_id = current_manufacturer.id
+    genre_list = params[:post][:genre_name].split(nil)
     if @post.save
+      @post.save_genre(genre_list)
       flash[:notice] = "投稿完了しました。"
       redirect_to shop_post_path(@post.id)
     else
@@ -27,7 +30,8 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
   def show
     @post = Post.find(params[:id])
     @manufacturer = @post.manufacturer
-    @post_new = Post.new
+    @genre_tags = @post.genres
+
   end
 
   def destroy
