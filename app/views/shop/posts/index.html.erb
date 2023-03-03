@@ -6,7 +6,15 @@
       <% end %>
     </ul>
 <% end %>
-  
+
+  <h3>タグリスト</h3>
+    <% @genre_list.each do |list| %>
+      <span>
+        <%= link_to list.genre_name, tag_posts_path(genre_id: list.id) %>
+        <%= "(#{list.posts.count})" %>
+      </span>
+    <% end %>
+
 <h3>投稿一覧</h3>
   <ul class="list-group">
     <% @posts.each do |post| %>
