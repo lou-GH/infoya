@@ -1,0 +1,25 @@
+<%= form_with model: @location, url: shop_location_path(@location) do |f| %>
+
+<h2>登録地の編集</h2>
+
+<p>郵便番号(ハイフンなし)</p>
+<label for="inputPostalCode"></label>
+<%= f.text_field :postal_code, autofocus: true, id:"inputPostalCode", placeholder: "0000000" %>
+
+<p>都道府県</p>
+<label for="inputPrefecture"></label>
+<%= f.collection_select :prefecture, JpPrefecture::Prefecture.all, :name, :name, { include_blank: '都道府県' }, { class: 'custom-select' } %>
+
+<p>住所</p>
+<label for="inputAddress"></label>
+<%= f.text_field :address, id:"inputAddress", placeholder: "東京都渋谷区代々木神園町0-0" %>
+
+<p>登録地名</p>
+<label for="inputName"></label>
+<%= f.text_field :name, id:"inputName",　placeholder: "〇〇店" %>
+
+<div class="text-right">
+  <button type="submit" class="btn btn-success">変更内容を保存</button>
+</div>
+
+<% end %>

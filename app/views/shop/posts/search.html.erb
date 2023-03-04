@@ -1,0 +1,15 @@
+<h2>投稿一覧</h2>
+　
+<!--ジャンルリスト-->
+<% @genre_list.each do |list| %>
+  <%= link_to list.genre_name, genre_posts_path(post_genre_id: list.id) %>
+  <%= "(#{list.posts.count})" %>
+<% end %>
+
+<!--タグによって絞り込んだ投稿一覧-->
+タグが<%= @genre.genre_name %>の投稿一覧
+
+<% @posts.each do |post| %>
+  <%= link_to post.content, post %>
+<% end %>
+

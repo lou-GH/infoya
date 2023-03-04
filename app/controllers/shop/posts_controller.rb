@@ -2,6 +2,12 @@ class Shop::PostsController < ApplicationController
 
 before_action :correct_user ,only:[:edit, :update, :destroy]
 
+  def search
+    @genre_list = Genre.all
+    @genre = Genre.find(params[:ganre_id])
+    @posts = @genre.posts.all
+  end
+
   def index
     @genre_list = Genre.all
     @post = Post.all
