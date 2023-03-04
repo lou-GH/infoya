@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
     resources :locations, only: [:edit, :create, :update, :destroy]
     resources :posts, only: [:index, :new, :show, :create, :destroy]
+    resources :genres do
+      get 'posts', to: 'posts#search'
+    end
 
   end
 

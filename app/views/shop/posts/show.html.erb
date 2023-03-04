@@ -1,0 +1,12 @@
+<h1>投稿詳細</h1>
+
+<p><%= @post.introduction %>
+
+
+<div>タグの入力</div>
+<% @post_genres.each do |genre| %>
+<div>
+<%= link_to genre.genre_name, shop_genre_posts_path(genre_id: genre.id) %>
+<%= "(#{genre.posts.count})" %>
+
+<%= link_to 'ホーム', root_path %>
