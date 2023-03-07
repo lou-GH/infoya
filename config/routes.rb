@@ -24,10 +24,29 @@ Rails.application.routes.draw do
     get 'manufacturers/information', to: 'manufacturers#update'
 
     resources :locations, only: [:edit, :create, :update, :destroy]
-    resources :posts, only: [:index, :new, :show, :create, :destroy]
+    resources :posts, only: [:index, :new, :show, :create, :destroy] do
+      resources :comments, only: [:create, :destroy]
+    end
     resources :genres do
       get 'posts', to: 'posts#search'
     end
+    resource :favorites, only: [:create, :destroy]
+    get 'users' => 'registrations#followers', as: 'followers'
+
+  end
+
+  namespace :public do
+    get 'users/unsubscribe'
+    get 'users/withdraw'
+    get 'users/my_page', to: 'users#show'
+    get 'users/information/edit', to: 'users#edit'
+    get 'users/information', to: 'users#update'
+
+    resources :posts, only: [:index, :show] do
+      resources :comments, only: [:create, :destroy]
+    end
+    resource :relationships, only: [:create, :destroy]
+    get 'manufacturers' => 'registrations#followings', as: 'followings'
 
   end
 

@@ -31,12 +31,23 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
       @manufacturer = current_manufacturer
       render :index
     end
+    comment = current_manufacturer.comments.new(comment_params)
+    comment.post_id = post.id
+    if comment.save
+    flash[:notice] = "コメント完了しました。"
+    redirect_to shop_post_path(@post.id)
+    else
+      @posts = Post.all
+      @manufacturer = current_manufacturer
+      render :index
+    end
   end
 
   def show
     @post = Post.find(params[:id])
     @manufacturer = @post.manufacturer
     @genre_tags = @post.genres
+    @comment = Comment.new
 
   end
 
@@ -61,6 +72,10 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
     unless @post.manufacturer == current_manufacturer
       redirect_to shop_posts_path
     end
+  end
+
+  def comment_params
+    params.require(:comment).permit(:comment)
   end
 
 end

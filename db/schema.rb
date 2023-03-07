@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_07_133034) do
+ActiveRecord::Schema.define(version: 2023_03_07_165619) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2023_03_07_133034) do
     t.integer "post_id"
     t.integer "user_id"
     t.integer "manufacturer_id"
-    t.string "comment"
+    t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["manufacturer_id"], name: "index_comments_on_manufacturer_id"
@@ -102,13 +102,22 @@ ActiveRecord::Schema.define(version: 2023_03_07_133034) do
     t.integer "location_id"
     t.integer "genre_tag_id"
     t.integer "notification_id"
-    t.string "introduction", default: "", null: false
+    t.text "introduction", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["genre_tag_id"], name: "index_posts_on_genre_tag_id"
     t.index ["location_id"], name: "index_posts_on_location_id"
     t.index ["manufacturer_id"], name: "index_posts_on_manufacturer_id"
     t.index ["notification_id"], name: "index_posts_on_notification_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "manufacturer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manufacturer_id"], name: "index_relationships_on_manufacturer_id"
+    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -140,4 +149,6 @@ ActiveRecord::Schema.define(version: 2023_03_07_133034) do
   add_foreign_key "posts", "locations"
   add_foreign_key "posts", "manufacturers"
   add_foreign_key "posts", "notifications"
+  add_foreign_key "relationships", "manufacturers"
+  add_foreign_key "relationships", "users"
 end

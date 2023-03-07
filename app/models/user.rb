@@ -9,5 +9,7 @@ class User < ApplicationRecord
   has_one_attached :user_icon
 
   has_many :comments, dependent: :destroy
+  has_many :relationships, dependent: :destroy
+  has_many :manufacturers, dependent: :destroy
 
 end

@@ -13,5 +13,7 @@ class Manufacturer < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :locations, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :relationships, dependent: :destroy
+  has_many :users, dependent: :destroy
 
 end

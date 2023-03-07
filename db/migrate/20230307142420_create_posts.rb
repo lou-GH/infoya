@@ -7,7 +7,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.references :genre_tag, foreign_key: true
       t.references :notification, foreign_key: true
 
-      t.string :introduction,   null: false, default: ""
+      t.text :introduction, null: false
 
 
       t.timestamps

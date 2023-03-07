@@ -6,7 +6,7 @@ class CreateComments < ActiveRecord::Migration[6.1]
       t.references :user, foreign_key: true
       t.references :manufacturer, foreign_key: true
 
-      t.string :comment
+      t.text :comment
 
       t.timestamps
     end

@@ -1,12 +1,25 @@
 <h1>投稿詳細</h1>
 
-<p><%= @post.introduction %>
+<%= image_tag @post.post_image %>
+<%= @post.introduction %>
 
 
-<div>タグの入力</div>
+<div>タグ</div>
 <% @post_genres.each do |genre| %>
-<div>
-<%= link_to genre.genre_name, shop_genre_posts_path(genre_id: genre.id) %>
-<%= "(#{genre.posts.count})" %>
+  <%= genre.genre_name %>
+<% end %>
+
+<%= link_to genre.genre_name, shop_genre_posts_path(genre_id: genre.id) do %>
+  <%= "(#{genre.posts.count})" %>
+<% end %>
+
+<!--コメントの数-->
+コメント数：<%= @posts.comments.count %>
+<% if @posts.manufacturer == current_manufacturer %>
+  <div class="botton"><%= link_to"削除",shop_post_comment_path(@posts), method: :delete,class:'btn btn-danger'%></div>
+<% end %>
+
+<div id="comments-area"><%= render "comments/comment",posts: @posts,comment: @comment %></div>
 
 <%= link_to 'ホーム', root_path %>
+
