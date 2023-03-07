@@ -1,5 +1,14 @@
 <h3>新規投稿</h3>
 
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>errors prohibited this obj from being saved:
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+  　  <% end %>
+    </ul>
+  <% end %>
+
 <%= form_with model: @post, url: shop_posts_path, method: :post do |f| %>
   <p><%= f.label :introduction,"投稿内容" %></p>
   <p><%= f.text_area :introduction %></p>
@@ -10,6 +19,9 @@
   スペースを入力することで複数のタグをつけることができます。
   <p><%= f.label :genre_name, "例：野菜 果物 加工食品" %></p>
   <p><%= f.text_field :genre_name %></p>
+
+  <p><%= f.label :post_image,"投稿画像" %></p>
+  <p><%= f.file_field :post_image %></p>
 
   <p><%= f.submit "投稿", class: "btn btn-primary" %></p>
 <% end %>

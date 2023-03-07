@@ -14,9 +14,9 @@ class Shop::LocationsController < ApplicationController
       redirect_to shop_manufacturers_my_page_path
     else
       @location = Location.new
-      @locations = current_manufacturer.location_id
+      @locations = current_manufacturer.locations
       # マイページへ
-      render template: "manufacturers/show"
+      render template: "shop/manufacturers/show"
     end
   end
 
