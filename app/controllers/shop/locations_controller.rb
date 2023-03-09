@@ -26,11 +26,11 @@ class Shop::LocationsController < ApplicationController
       flash[:notice] = "Location  was successfully updated."
       @locations = current_manufacturer.locations
       # マイページへ
-      redirect_to root_path
+      redirect_to shop_manufacturers_my_page_path
     else
       @locations = current_manufacturer.locations
-      # マイページへ
-      render :home
+      # 編集ページを再表示
+      render :edit
     end
   end
 
@@ -44,7 +44,7 @@ class Shop::LocationsController < ApplicationController
     else
       @locations = current_manufacturer.locations
       # マイページへ
-      render :home
+      render template: "shop/manufacturers/show"
     end
   end
 

@@ -1,3 +1,10 @@
+<% if @manufacturer.errors.any? %>
+  <%= @manufacturer.errors.count %>件のエラーが発生しました
+  <% @manufacturer.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+<% end %>
+
 <%= form_with model: @manufacturer, url: manufacturers_information_path do |f| %>
 
 <div class="container px-5 px-sm-0">

@@ -1,16 +1,80 @@
-<% if current_user.following?(@manufacturer) %>
-  <%= link_to "フォロー外す", public_relationships_path(manufacturer_id: @manufacturer.id), method: :delete %>
-<% else %>
-  <%= link_to "フォローする", public_relationships_path(manufacturer_id: @manufacturer.id), method: :post %>
-<% end %>
 
-<!--<div class="container px-5 px-sm-0">-->
-<!--  <h2>マイページ</h2>-->
 
-<!--  <div class="row">-->
-<%= @manufacturer.account_name %>
-<% if @manufacturer.manufacturer_icon.attached? %>
-  <%= imgae_tag manufacturer.manufacturer_icon %>
-<% else %>
-  <%= image_tag 'no_image.jpg', class: 'profile-manufacturer_icon-img' %>
-<% end %>
+<div class="container px-5 px-sm-0">
+  <div class="col-md-2">
+    <div class="lead font-weight-bold">生産者登録情報</div>
+  </div>
+
+  <div class="my-3">
+    <div class="d-block d-md-flex">
+      <div class="mr-5">
+        <% if @manufacturer.manufacturer_icon.attached? %>
+          <%= imgae_tag manufacturer.manufacturer_icon %>
+        <% else %>
+          <%= image_tag 'no_image.jpg', class: 'profile-manufacturer_icon-img' %>
+        <% end %>
+      </div>
+      <div>
+        <h4><%= @manufacturer.account_name %></h4>
+        <% if current_user.following?(@manufacturer) %>
+          <%= link_to "フォロー外す", public_relationships_path(manufacturer_id: @manufacturer.id), method: :delete, class: "btn btn-primary" %>
+        <% else %>
+          <%= link_to "フォローする", public_relationships_path(manufacturer_id: @manufacturer.id), method: :post, class: "btn btn-denger" %>
+        <% end %>
+      </div>
+    </div>
+
+    <% if @manufacturer.introduction.present? %>
+      <hr>
+      <%= simple_format(@manufacturer.introduction) %>
+      <hr>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <h5>
+      登録地の主な都道府県 : <%= @manufacturer.prefecture.blank? ? '未登録' : @manufacturer.prefecture %>
+    </h5>
+  </div>
+
+  <div class="mt-5">
+
+    <h4>登録地の一覧</h4>
+    <div class="row">
+      <% @manufacturer.locations.each do |location| %>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-header">
+              <small>
+                No. <%= @manufacturer.location.id %>
+              </small>
+            </div>
+            <%= image_tag @manufacturer.location.location_image, class: 'my-page-card-img' %>
+            <div class="card-body">
+              <div class="card-text">
+                <h5><%= @manufacturer.location.name %></h5>
+                <div>
+                  <div>
+                    <%= @manufacturer.location.introduction %>
+                  </div>
+                  <div>
+                    〒<%= @manufacturer.location.postal_code %>
+                  </div>
+                  <div>
+                    <%= @manufacturer.location.prefecture %>
+                  </div>
+                  <div>
+                    <%= @manufacturer.location.address %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
+
