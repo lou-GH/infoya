@@ -42,11 +42,18 @@ Rails.application.routes.draw do
     get 'users/information/edit', to: 'users#edit'
     get 'users/information', to: 'users#update'
 
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+
+    get 'manufacturers/:manufacturer_id' , to: 'manufacturers#show', as: 'manufacturer'
+    get 'manufacturers' , to: 'manufacturers#index', as: 'manufacturers'
+
+
     resources :posts, only: [:index, :show] do
       resources :comments, only: [:create, :destroy]
     end
-    resource :relationships, only: [:create, :destroy]
-    get 'manufacturers' => 'registrations#followings', as: 'followings'
+
 
   end
 

@@ -1,0 +1,16 @@
+<% if current_user.following?(@manufacturer) %>
+  <%= link_to "フォロー外す", public_relationships_path(manufacturer_id: @manufacturer.id), method: :delete %>
+<% else %>
+  <%= link_to "フォローする", public_relationships_path(manufacturer_id: @manufacturer.id), method: :post %>
+<% end %>
+
+<!--<div class="container px-5 px-sm-0">-->
+<!--  <h2>マイページ</h2>-->
+
+<!--  <div class="row">-->
+<%= @manufacturer.account_name %>
+<% if @manufacturer.manufacturer_icon.attached? %>
+  <%= imgae_tag manufacturer.manufacturer_icon %>
+<% else %>
+  <%= image_tag 'no_image.jpg', class: 'profile-manufacturer_icon-img' %>
+<% end %>

@@ -12,4 +12,26 @@ class User < ApplicationRecord
   has_many :relationships, dependent: :destroy
   has_many :manufacturers, dependent: :destroy
 
+  # フォローをした、されたの関係
+  # has_many :relationships, class_name: "Relationship", foreign_key: "manufacturer_id", dependent: :destroy
+
+  # 一覧画面で使う
+  # has_many :followings, through: :relationships, source: :manufacturer
+
+  # フォローしたときの処理
+  def follow(manufacturer_id)
+    relationships.create(manufacturer_id: manufacturer_id)
+  end
+  # フォローを外すときの処理
+  def unfollow(manufacturer_id)
+    relationships.find_by(manufacturer_id: manufacturer_id).destroy
+  end
+
+  # フォローしているか判定
+  def following?(manufacturer)
+    # followings.include?(manufacturer)
+    # [1,2].include?(1)
+    relationships.pluck(:manufacturer_id).include?(manufacturer.id)
+  end
+
 end
