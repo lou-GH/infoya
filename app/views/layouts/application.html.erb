@@ -23,15 +23,22 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%#= link_to '投稿フォーム', new_post_image_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%#= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
-            </li>
+            <!--manufacturerログインの状態時表示したいheaderのメニュ-->
+              <div class="text-white">
+                ようこそ、<%= current_user.account_name %>さん！
+              </div>
+              <li class="nav-item">
+                <%= link_to 'マイページ', public_users_my_page_path(current_user.id), class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '投稿一覧', public_posts_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '生産者一覧', public_manufacturers_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+              </li>
 
             <% elsif manufacturer_signed_in? %>
             <!--manufacturerログインの状態時表示したいheaderのメニュ-->
@@ -45,9 +52,9 @@
                 <% end %>
               </li>
               <li class="nav-item">
-                <%#= link_to items_path, class: 'nav-link text-dark' do %>
-                  <!--投稿一覧-->
-                <%# end %>
+                <%= link_to shop_posts_path, class: 'nav-link text-dark' do %>
+                  投稿一覧
+                <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to destroy_manufacturer_session_path, method: :delete, class: 'nav-link text-dark' do %>
@@ -63,7 +70,7 @@
               <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログイン選択画面", home_about_path, class: 'nav-link text-dark' %>
+              <%= link_to "about画面", home_about_path, class: 'nav-link text-dark' %>
             </li>
             <% end %>
             </ul>
