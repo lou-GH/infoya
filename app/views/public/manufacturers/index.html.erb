@@ -1,0 +1,30 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <h1>生産者一覧</h1>
+
+      <ul class="manufacturers">
+        <table class = "table">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <% @manufacturers.each do |manufacturer| %>
+          <tbody>
+            <tr>
+              <td><%= image_tag manufacturer.get_manufacturer_icon(100,100) %></td>
+              <td><%= manufacturer.name %></td>
+              <td><%= link_to "詳細", public_manufacturer_path(manufacturer) %></td>
+            </tr>
+          </tbody>
+          <% end %>
+
+        </table>
+      </ul>
+    </div>
+  </div>
+</div>

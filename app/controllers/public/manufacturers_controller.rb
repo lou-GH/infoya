@@ -5,4 +5,8 @@ class Public::ManufacturersController < ApplicationController
     @locations = @manufacturer.locations
   end
 
+  def index
+    @manufacturers = Manufacturer.all
+  end
+
 end
