@@ -15,5 +15,6 @@ class Manufacturer < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :relationships, dependent: :destroy
   has_many :users, dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visiter_id', dependent: :destroy
 
 end

@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   has_many :genre_tags, dependent: :destroy
   has_many :genres, through: :genre_tags
   has_many :comments, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   validates :post_image, presence: true
   validates :introduction, presence: true,

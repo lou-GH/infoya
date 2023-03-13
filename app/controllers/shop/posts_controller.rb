@@ -24,7 +24,8 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
     genre_list = params[:post][:genre_name].split(nil)
     if @post.save
       @post.save_genre(genre_list)
-      flash[:notice] = "投稿完了しました。"
+      @post.create_notification_by(current_manufacturer)
+      flash[:notice] = "投稿しました。"
       redirect_to shop_post_path(@post.id)
     else
       @posts = Post.all
@@ -34,8 +35,9 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
     comment = current_manufacturer.comments.new(comment_params)
     comment.post_id = post.id
     if comment.save
-    flash[:notice] = "コメント完了しました。"
-    redirect_to shop_post_path(@post.id)
+      @post.create_notification_by(current_manufacturer)
+      flash[:notice] = "コメントしました。"
+      redirect_to shop_post_path(@post.id)
     else
       @posts = Post.all
       @manufacturer = current_manufacturer

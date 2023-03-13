@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     get 'users' => 'registrations#followers', as: 'followers'
 
+    resources :notifications, only: %i[index destroy]
+
   end
 
   namespace :public do
@@ -51,6 +53,7 @@ Rails.application.routes.draw do
     get 'manufacturers/:manufacturer_id' , to: 'manufacturers#show', as: 'manufacturer'
     get 'manufacturers' , to: 'manufacturers#index', as: 'manufacturers'
 
+    resources :notifications, only: %i[index destroy]
 
     resources :posts, only: [:index, :show] do
       resources :comments, only: [:create, :destroy]
