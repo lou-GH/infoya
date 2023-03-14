@@ -1,0 +1,10 @@
+タグ一覧
+
+<ul>
+  <% @genres.each do |genre| %>
+    <li>
+      <%# タグの名前と、関連付く記事数を表示 %>
+      <%= link_to "#{genre.genre_name} ( Posts: #{genre.posts.count} )", shop_genre_path(genre) %>
+    </li>
+  <% end %>
+</ul>

@@ -18,10 +18,10 @@ class Public::RelationshipsController < ApplicationController
 
   # フォローフォロワー一覧処理
   def followings
-    user = Manufacturer.find(params[:manufacturer_id])
-    @users = user.relationships
+    manufacturer = Manufacturer.find(params[:manufacturer_id])
+    @manufacturers = manufacturer.relationships
   end
-  
-  
-  
+
+
+
 end

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  # 管理者用
+  # URL /admin/sign_in
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
+  }
   #生産者用
   # URL /manufacturers/sign_in ...
   devise_for :manufacturers, skip: [:passwords], controllers: {
@@ -53,13 +58,23 @@ Rails.application.routes.draw do
     get 'manufacturers/:manufacturer_id' , to: 'manufacturers#show', as: 'manufacturer'
     get 'manufacturers' , to: 'manufacturers#index', as: 'manufacturers'
 
+    resources :genres do
+      get 'posts', to: 'posts#search'
+    end
+
     resources :notifications, only: %i[index destroy]
 
     resources :posts, only: [:index, :show] do
       resources :comments, only: [:create, :destroy]
     end
 
+  end
 
+  namespace :admin do
+    resources :posts, only: [:index, :show] do
+      resources :comments, only: [:destroy]
+    end
+    resources :genres, only: [:index, :destroy]
   end
 
 end

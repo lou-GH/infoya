@@ -17,8 +17,8 @@
   <%= f.select :location_id, options_from_collection_for_select(Location.all, :id, :name, :address) %><br>
 
   スペースを入力することで複数のタグをつけることができます。
-  <p><%= f.label :genre_name, "例：野菜 果物 加工食品" %></p>
-  <p><%= f.text_field :genre_name %></p>
+  <p><%= f.label :genre, "例：野菜 果物 加工食品" %></p>
+  <p><%= f.text_field :genre, value: @post.genres.pluck(:genre_name) %></p>
 
   <p><%= f.label :post_image,"投稿画像" %></p>
   <p><%= f.file_field :post_image %></p>

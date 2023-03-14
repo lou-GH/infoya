@@ -23,10 +23,17 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
-            <!--manufacturerログインの状態時表示したいheaderのメニュ-->
+            <!--userログインの状態時表示したいheaderのメニュ-->
               <div class="text-white">
                 ようこそ、<%= current_user.account_name %>さん！
               </div>
+              <li class="nav-item">
+                <% if unchecked_notifications.any? %>
+                  <li><%= link_to "Notice",public_notifications_path, class: "btn btn-light fas fa-bell",style: "color:tomato;"%>
+                <% else %>
+                  <li><%= link_to "Notice",public_notifications_path, class: "btn btn-light fas fa-check"%>
+                <% end %>
+              </li>
               <li class="nav-item">
                 <%= link_to 'マイページ', public_users_my_page_path(current_user.id), class: 'nav-link text-dark' %>
               </li>

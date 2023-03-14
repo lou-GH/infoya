@@ -7,6 +7,10 @@
     </ul>
 <% end %>
 
+<%= link_to new_shop_post_path do %>
+  <button type="button" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;">＋</button>
+<% end %>
+
   <h3>タグリスト</h3>
     <% @genre_list.each do |list| %>
       <span>
@@ -20,7 +24,7 @@
     <% @posts.each do |post| %>
       <li class="list-group-item">
         <span class="badge text-danger">
-          <%= link_to "削除",shop_post_path(post.id)),method: :delete %>
+          <%= link_to "削除",shop_post_path(post.id),method: :delete %>
         </span>
         <%= image_tag post.post_image %>
         <%= post.introduction %>

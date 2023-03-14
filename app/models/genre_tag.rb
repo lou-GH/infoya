@@ -1,5 +1,6 @@
 class GenreTag < ApplicationRecord
 
+  # genre_tagsテーブルは、postsテーブルとgenresテーブルに属している
   belongs_to :post
   belongs_to :genre
 

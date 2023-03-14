@@ -1,0 +1,13 @@
+タグ一覧
+
+<%# タグ名 %>
+<h3><%= @genre.genre_name %></h3>
+
+<%# タグに関連付く記事一覧 %>
+<ul>
+  <% @genre.posts.each do |post| %>
+    <li>
+      <%= link_to post.introduction, shop_post_path(post) %>
+    </li>
+  <% end %>
+</ul>
