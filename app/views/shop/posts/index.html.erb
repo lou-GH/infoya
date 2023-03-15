@@ -14,7 +14,7 @@
   <h3>タグリスト</h3>
     <% @genre_list.each do |list| %>
       <span>
-        <%= link_to list.genre_name, tag_posts_path(genre_id: list.id) %>
+        <%= link_to list.genre_name, shop_genre_posts_path(genre_id: list.id) %>
         <%= "(#{list.posts.count})" %>
       </span>
     <% end %>

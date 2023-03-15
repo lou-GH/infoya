@@ -6,6 +6,7 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
     @genre_list = Genre.all
     @genre = Genre.find(params[:ganre_id])
     @posts = @genre.posts.all
+    # /shop/genres/:genre_id/posts(.:format)
   end
 
   def index
@@ -23,7 +24,7 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
       # Rails.logger.info "**********【#{params.inspect}】**********"
       # genre = Genre.new
       # genre.genre_name = params[:genre_name]
-      
+
     # パラメーターを受け取り保存準備
     @post = current_manufacturer.posts.new(post_params)
 
