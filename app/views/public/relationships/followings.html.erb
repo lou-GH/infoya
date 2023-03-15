@@ -1,0 +1,18 @@
+<% if @manufacturers.exists? %>
+  <% @manufacturers.each do |manufacturer| %>
+    <table>
+      <thead>
+        <tr>
+          <th>name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= manufacturer.account_name %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>

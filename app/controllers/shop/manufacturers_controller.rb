@@ -24,7 +24,7 @@ class Shop::ManufacturersController < ApplicationController
     @manufacturer = current_manufacturer
     if @manufacturer.update(manufacturer_params)
       flash[:notice] = "You have updated manufacturer successfully."
-      redirect_to manufacturers_my_page_path
+      redirect_to shop_manufacturers_my_page_path
     else
       render :edit
     end

@@ -1,6 +1,6 @@
 <table>
 
-  <% posts.comments.each do |comment| %>
+  <% post.comments.each do |comment| %>
   <tr>
     <td>
       <%= attachment_image_tag comment.manufacurer, :manufacurer_icon, format: 'jpeg',size: "50x50",fallback: "no_image.jpg" %><br>
@@ -26,7 +26,7 @@
 <div class="form-group">
   <label for="newcomment">コメントする</label>
 
-  <%= form_with(model:[posts, comment], local: true) do |f| %>
+  <%= form_with(url: shop_post_comments_path(post), method: :patch, local: true) do |f| %>
     <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力",class:"form-control" %>
     <%= f.submit "送信する" %>
   <% end %>

@@ -7,19 +7,21 @@
 <div>タグ</div>
 <% @post_genres.each do |genre| %>
   <%= link_to genre.genre_name  %>
+  
+  <%= link_to shop_genre_posts_path(genre_id: genre.id) do %>
+    <%= "#{genre.genre_name}(#{genre.posts.count})" %>
+  <% end %>
 <% end %>
 
-<%= link_to genre.genre_name, shop_genre_posts_path(genre_id: genre.id) do %>
-  <%= "(#{genre.posts.count})" %>
-<% end %>
 
 <!--コメントの数-->
-コメント数：<%= @posts.comments.count %>
-<% if @posts.manufacturer == current_manufacturer %>
-  <div class="botton"><%= link_to"削除",shop_post_comment_path(@posts), method: :delete,class:'btn btn-danger'%></div>
+コメント数：<%= @post.comments.count %>
+<% if @post.manufacturer == current_manufacturer %>
+  <div class="botton"><%= link_to"削除",shop_post_comment_path(@post), method: :delete,class:'btn btn-danger'%></div>
 <% end %>
 
-<div id="comments-area"><%= render "comments/comment",posts: @posts,comment: @comment %></div>
+
+<div id="comments-area"><%= render "shop/comments/comment",post: @post,comment: @comment %></div>
 
 <%= link_to '投稿一覧', shop_posts_path %>
 

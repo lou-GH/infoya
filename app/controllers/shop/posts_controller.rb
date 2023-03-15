@@ -23,9 +23,9 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
       # Rails.logger.info "**********【#{params.inspect}】**********"
       # genre = Genre.new
       # genre.genre_name = params[:genre_name]
+      
     # パラメーターを受け取り保存準備
     @post = current_manufacturer.posts.new(post_params)
-
 
     @post.manufacturer_id = current_manufacturer.id
     # genre_list = params[:post][:genre_name].split(nil)
@@ -46,23 +46,14 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
       render :new
     end
 
-    comment = current_manufacturer.comments.new(comment_params)
-    comment.post_id = post.id
-    if comment.save
-      @post.create_notification_by(current_manufacturer)
-      flash[:notice] = "コメントしました。"
-      redirect_to shop_post_path(@post.id)
-    else
-      @posts = Post.all
-      @manufacturer = current_manufacturer
-      render :index
-    end
+
+
   end
 
   def show
     @post = Post.find(params[:id])
     @manufacturer = @post.manufacturer
-    @genre_tags = @post.genres
+    @post_genres = @post.genres
     @comment = Comment.new
 
   end

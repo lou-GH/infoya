@@ -7,7 +7,7 @@ class Genre < ApplicationRecord
   #   Genre.postsとすれば、タグに紐付けられたPostを取得可能になる
   has_many :posts, through: :genre_tags
 
-  validates :name, uniqueness: true
+  validates :genre_name, uniqueness: true
 
 
 end

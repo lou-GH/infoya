@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
     if resource_or_scope.is_a?(Admin)
         admin_root_path
     elsif resource_or_scope.is_a?(User)
-        public_followings_path
+        public_followings_path(resource_or_scope)
     elsif resource_or_scope.is_a?(Manufacturer)
-        shop_posts_path
+        shop_posts_path(resource_or_scope)
     else
         root_path
     end

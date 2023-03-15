@@ -21,8 +21,8 @@ class Post < ApplicationRecord
   def save_genres(genres)
     # タグをスペース区切りで分割し配列にする
     #   連続した空白も対応するので、最後の“+”がポイント
-    # genre_list = genres.split(/[[:blank:]]+/)
-    genre_list = genres.split(nil)
+    genre_list = genres.split(/[[:blank:]]+/)
+    # genre_list = genres.split(nil)
     # 自分自身に関連づいたタグを取得する
     current_genres = self.genres.pluck(:genre_name) unless self.genres.nil?
     # (1) 元々自分に紐付いていたタグと投稿されたタグの差分を抽出
@@ -69,17 +69,20 @@ class Post < ApplicationRecord
       manufacturer_icon.variant(resize_to_limit: [width, height]).processed
   end
 
-  def create_notification_by(current_user)
-    notification = current_user.active_notifications.new(
-      post_id: id,
-      visited_id: user_id,
-      action: 'comment'
-    )
-    if notification.visitor_id == notification.visited_id
-          notification.checked = true
-    end
+  def create_notification_by(current_manufacturer)
+    current_manufacturer.users.each do |user|
+      notification = current_manufacturer.active_notifications.new(
+        post_id: id,
+        visited_id: user.id ,
+        action: 'user'
+      )
+      if notification.visiter_id == notification.visited_id
+            notification.checked = true
+      end
 
-      notification.save if notification.valid?
+        notification.save if notification.valid?
+  end
+
   end
 
 

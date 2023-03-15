@@ -1,4 +1,4 @@
-class Public::NotificationsController < ApplicationControlle
+class Public::NotificationsController < ApplicationController
 
   def index
     @notifications = current_user.passive_notifications.(params[:page]).per(20)
