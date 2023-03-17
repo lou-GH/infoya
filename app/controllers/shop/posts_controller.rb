@@ -11,9 +11,10 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
 
   def index
     @genre_list = Genre.all
-    @posts = Post.all
+    # @posts = Post.all
     @post = Post.new
     @manufacturer = current_manufacturer
+    @posts = @manufacturer.posts
   end
 
   def new
@@ -29,6 +30,7 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
     @post = current_manufacturer.posts.new(post_params)
 
     @post.manufacturer_id = current_manufacturer.id
+
     # genre_list = params[:post][:genre_name].split(nil)
 
     # Postを保存
@@ -41,8 +43,9 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
       # 成功したら投稿詳細へリダイレクト
       redirect_to shop_post_path(@post.id)
     else
-      @posts = Post.all
+      # @posts = Post.all
       @manufacturer = current_manufacturer
+      @posts = @manufacturer.posts
       # 失敗した場合は、newへ戻る
       render :new
     end

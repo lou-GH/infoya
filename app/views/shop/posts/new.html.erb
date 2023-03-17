@@ -13,8 +13,8 @@
   <p><%= f.label :introduction,"投稿内容" %></p>
   <p><%= f.text_area :introduction %></p>
 
-  <%= f.label :location, "登録地から選択" %><br>
-  <%= f.select :location_id, options_from_collection_for_select(Location.all, :id, :name, :address) %><br>
+  <%= f.label :location, "登録地から選択" %>※選択肢がない場合はマイページより登録してください。<br>
+  <%= f.select :location_id, options_from_collection_for_select(current_manufacturer.locations, :id, :name, :address) %><br>
 
   スペースを入力することで複数のタグをつけることができます。
   <p><%= f.label :genre, "例：野菜 果物 加工食品" %></p>

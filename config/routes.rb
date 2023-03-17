@@ -20,8 +20,8 @@ Rails.application.routes.draw do
 
   root 'home#top'
   get 'home/about'
-  get 'home/sign_in'
   get 'home/sign_up'
+  get 'home/sign_in'
 
   namespace :shop do
     get 'manufacturers/unsubscribe'
