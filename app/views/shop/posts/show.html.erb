@@ -1,27 +1,43 @@
-<h1>投稿詳細</h1>
+<div class="container px-5 px-sm-0">
+  <div class="row">
 
-<%= image_tag @post.post_image %>
-<%= @post.introduction %>
+    <div class="col-md-2">
+      <div class="lead font-weight-bold">投稿詳細</div>
+    </div>
+  </div>
 
-
-<div>タグ</div>
-<% @post_genres.each do |genre| %>
-  <%= link_to genre.genre_name  %>
-  
-  <%= link_to shop_genre_posts_path(genre_id: genre.id) do %>
-    <%= "#{genre.genre_name}(#{genre.posts.count})" %>
-  <% end %>
-<% end %>
-
-
-<!--コメントの数-->
-コメント数：<%= @post.comments.count %>
-<% if @post.manufacturer == current_manufacturer %>
-  <div class="botton"><%= link_to"削除",shop_post_comment_path(@post), method: :delete,class:'btn btn-danger'%></div>
-<% end %>
+  <div class="row">
+    <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %>
+    <div class="col-xs-11 col-lg-5">
+      <%= image_tag @post.post_image, class:'post_image_show' %>
+    </div>
+    <div class="col-xs-11 col-lg-5">
+      <%= @post.introduction %>
+    </div>
 
 
-<div id="comments-area"><%= render "shop/comments/comment",post: @post,comment: @comment %></div>
+      <div>タグ</div>
+      <% @post_genres.each do |genre| %>
+        <%= link_to genre.genre_name  %>
 
-<%= link_to '投稿一覧', shop_posts_path %>
+        <%= link_to shop_genre_posts_path(genre_id: genre.id) do %>
+          <%= "#{genre.genre_name}(#{genre.posts.count})" %>
+        <% end %>
+      <% end %>
 
+
+      <!--コメントの数-->
+      コメント数：<%= @post.comments.count %>
+      <% if @post.manufacturer == current_manufacturer %>
+        <div class="botton"><%= link_to"削除",shop_post_comment_path(@post), method: :delete,class:'btn btn-danger'%></div>
+      <% end %>
+
+
+      <div id="comments-area"><%= render "shop/comments/comment",post: @post,comment: @comment %></div>
+
+    </div>
+  </div>
+
+  <%= link_to '投稿一覧', shop_posts_path %>
+
+</div>

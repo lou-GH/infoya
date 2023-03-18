@@ -1,11 +1,3 @@
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>errors prohibited this obj from being saved:
-    <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-<% end %>
 
 <%= link_to new_shop_post_path do %>
   <button type="button" class="btn btn-primary rounded-circle p-0" style="width:2rem;height:2rem;">＋</button>

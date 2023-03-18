@@ -1,6 +1,6 @@
 class Shop::PostsController < ApplicationController
 
-before_action :correct_user ,only:[:edit, :update, :destroy]
+before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
 
   def search
     @genre_list = Genre.all
@@ -12,13 +12,18 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
   def index
     @genre_list = Genre.all
     # @posts = Post.all
-    @post = Post.new
+    # @post = Post.new
     @manufacturer = current_manufacturer
     @posts = @manufacturer.posts
+    # @post = Post.find(params[:id])
+    # @manufacturer = @post.manufacturer
+    # @genre_list = @posts.genres
+    # @post_genres = @post.genres
   end
 
   def new
     @post = current_manufacturer.posts.new
+    @post.genre_tags.build
   end
 
   def create
@@ -34,10 +39,13 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
     # genre_list = params[:post][:genre_name].split(nil)
 
     # Postを保存
-    if @post.save
+    if @post.valid?
       # タグの保存
-      @post.save_genres(params[:post][:genre])
+      @post.genre_tags.each do |genre|
+        @post.save_genre_tag(params[:post][:genre])
+      end
       # @post.save_genre(genre_list)
+      @post.save
       @post.create_notification_by(current_manufacturer)
       flash[:notice] = "投稿しました。"
       # 成功したら投稿詳細へリダイレクト
@@ -58,8 +66,14 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
     @post = Post.find(params[:id])
     @manufacturer = @post.manufacturer
     @post_genres = @post.genres
-    @comment = Comment.new
-
+    @comments = @post.comments
+    @location = Locations.find(params[:post][:location_id])
+    @post.location_prefecture = @location.prefecture
+    @post.location_name = @location.name
+    @post.location_postal_code = @location.postal_code
+    @post.location_address = @location.address
+    @post.location_location_image = @location.location_location_image
+    @post.location_introduction = @location.introduction
   end
 
   def destroy
@@ -76,7 +90,8 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
   private
 
   def post_params
-    params.require(:post).permit(:introduction, :post_image, :location_id, :genre_name)
+    params.require(:post).permit(:introduction, :post_image, :location_id,
+                                  { genre_tags: []}).merge.(manufacturer_id: current_manufacturer.id)
   end
 
   def correct_manufacturer
@@ -87,7 +102,7 @@ before_action :correct_user ,only:[:edit, :update, :destroy]
   end
 
   def comment_params
-    params.require(:comment).permit(:comment)
+    params.require(:comment).permit(:comment).merge.(manufacturer_id: current_manufacturer.id)
   end
 
 end
