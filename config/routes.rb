@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     get 'manufacturers/information', to: 'manufacturers#update'
 
     resources :locations, only: [:edit, :create, :update, :destroy]
-    resources :posts, only: [:index, :new, :show, :create, :destroy] do
+    resources :posts, only: [:index, :new, :show, :create, :destroy, :update] do
       resources :comments, only: [:create, :destroy]
     end
     resources :genres do
