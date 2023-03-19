@@ -41,9 +41,9 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
     # Postを保存
     if @post.valid?
       # タグの保存
-      @post.genre_tags.each do |genre|
-        @post.save_genre_tag(params[:post][:genre])
-      end
+      # @post.genre_tags.each do |genre|
+      @post.save_genres(genres)
+      # end
       # @post.save_genre(genre_list)
       @post.save
       @post.create_notification_by(current_manufacturer)
