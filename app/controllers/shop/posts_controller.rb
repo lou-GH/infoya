@@ -36,20 +36,21 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
 
     @post.manufacturer_id = current_manufacturer.id
 
-    # genre_list = params[:post][:genre_name].split(nil)
+    genre_list = params[:post][:genre_name].split(nil)
 
     # Postを保存
-    if @post.valid?
+    # if @post.valid?
+    if @post.save
       # タグの保存
       # @post.genre_tags.each do |genre|
-      @post.save_genres(genres)
+      @post.save_genres(genre_list)
       # end
       # @post.save_genre(genre_list)
-      @post.save
+      # @post.save
       @post.create_notification_by(current_manufacturer)
       flash[:notice] = "投稿しました。"
       # 成功したら投稿詳細へリダイレクト
-      redirect_to shop_post_path(@post.id)
+      redirect_to shop_posts_path
     else
       # @posts = Post.all
       @manufacturer = current_manufacturer
@@ -67,13 +68,14 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
     @manufacturer = @post.manufacturer
     @post_genres = @post.genres
     @comments = @post.comments
-    @location = Locations.find(params[:post][:location_id])
-    @post.location_prefecture = @location.prefecture
-    @post.location_name = @location.name
-    @post.location_postal_code = @location.postal_code
-    @post.location_address = @location.address
-    @post.location_location_image = @location.location_location_image
-    @post.location_introduction = @location.introduction
+    @comment = Comment.new
+    # @location = Locations.find(params[:post][:location_id])
+    # @post.location_prefecture = @location.prefecture
+    # @post.location_name = @location.name
+    # @post.location_postal_code = @location.postal_code
+    # @post.location_address = @location.address
+    # @post.location_locaｗｑ２ｗ３post.location_locaｗｑ２ｗ３tion_image = @location.location_location_image
+    # @post.location_introduction = @location.introduction
   end
 
   def destroy
@@ -90,8 +92,7 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
   private
 
   def post_params
-    params.require(:post).permit(:introduction, :post_image, :location_id,
-                                  { genre_tags: []}).merge.(manufacturer_id: current_manufacturer.id)
+    params.require(:post).permit(:introduction, :post_image, :location_id)
   end
 
   def correct_manufacturer

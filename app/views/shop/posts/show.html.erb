@@ -7,24 +7,24 @@
   </div>
 
   <div class="row">
-    <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %>
+
     <div class="col-xs-11 col-lg-5">
       <%= image_tag @post.post_image, class:'post_image_show' %>
     </div>
     <div class="col-xs-11 col-lg-5">
-      <%= @post.introduction %>
-    </div>
-
-
-      <div>タグ</div>
+      <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %><br>
+      <%= @post.introduction %><br>
       <% @post_genres.each do |genre| %>
-        <%= link_to genre.genre_name  %>
+        <%#= link_to genre.genre_name  %>
 
         <%= link_to shop_genre_posts_path(genre_id: genre.id) do %>
           <%= "#{genre.genre_name}(#{genre.posts.count})" %>
         <% end %>
       <% end %>
 
+      <%= link_to "削除",shop_post_path(@post.id),method: :delete, data: { confilm: "本当に投稿を削除しますか？" } %>
+
+      <br>
 
       <!--コメントの数-->
       コメント数：<%= @post.comments.count %>
@@ -32,6 +32,7 @@
         <div class="botton"><%= link_to"削除",shop_post_comment_path(@post), method: :delete,class:'btn btn-danger'%></div>
       <% end %>
 
+    </div>
 
       <div id="comments-area"><%= render "shop/comments/comment",post: @post,comment: @comment %></div>
 

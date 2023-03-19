@@ -43,11 +43,11 @@
 
         <div class="form-group">
           <div class="col-md-12">
-            <%= f.label :genre_tags, "タグ　例：野菜 果物 加工食品" %><br>
+            <%= f.label :genre_name, "タグ　例：野菜 果物 加工食品" %><br>
             <small>※スペースを入力することで複数のタグをつけることができます。</small>
           </div>
           <div class="offset-md-1 col-md-11">
-            <%= f.text_field :genre_tags, value: @post.genres.pluck(:genre_name), class: 'form-control' %>
+            <%= f.text_field :genre_name, value: @post.genres.pluck(:genre_name), class: 'form-control' %>
           </div>
         </div>
 

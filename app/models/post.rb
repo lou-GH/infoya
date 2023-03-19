@@ -18,11 +18,12 @@ class Post < ApplicationRecord
   # validates :genre_name, presence: true
 
   # def save_genre(sent_genres)
-  def save_genres(genres)
+  def save_genres(genre_list)
     # タグをスペース区切りで分割し配列にする
     #   連続した空白も対応するので、最後の“+”がポイント
-    genre_list = genres.split(/[[:blank:]]+/)
+    # genre_list = genres.split(/[[:blank:]]+/)
     # genre_list = genres.split(nil)
+    # genre_list = params[:post][:genre_name].split(nil)
     # 自分自身に関連づいたタグを取得する
     current_genres = self.genres.pluck(:genre_name) unless self.genres.nil?
     # (1) 元々自分に紐付いていたタグと投稿されたタグの差分を抽出
