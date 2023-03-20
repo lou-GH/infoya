@@ -1,7 +1,7 @@
 <h3>タグリスト</h3>
     <% @genre_list.each do |list| %>
       <span>
-        <%= link_to list.genre_name, tag_posts_path(genre_id: list.id) %>
+        <%= link_to list.genre_name, public_tag_posts_path(genre_id: list.id) %>
         <%= "(#{list.posts.count})" %>
       </span>
     <% end %>
@@ -10,9 +10,6 @@
   <ul class="list-group">
     <% @posts.each do |post| %>
       <li class="list-group-item">
-        <span class="badge text-danger">
-          <%= link_to "削除",shop_post_path(post.id),method: :delete %>
-        </span>
         <%= image_tag post.post_image %>
         <%= post.introduction %>
       </li>

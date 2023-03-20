@@ -10,7 +10,9 @@ class Post < ApplicationRecord
   #   Post.genresとすれば、Postに紐付けられたTagの取得が可能
   has_many :genres, through: :genre_tags
   has_many :comments, dependent: :destroy
+  has_many :comment_users, through: :comments, source: :manufacturer
   has_many :notifications, dependent: :destroy
+
 
   validates :post_image, presence: true
   validates :introduction, presence: true,

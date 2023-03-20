@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
     resources :locations, only: [:edit, :create, :update, :destroy]
     resources :posts, only: [:index, :new, :show, :create, :destroy, :update] do
-      resources :comments, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy, :update]
     end
     resources :genres do
       get 'posts', to: 'posts#search'
@@ -65,7 +65,7 @@ Rails.application.routes.draw do
     resources :notifications, only: %i[index destroy]
 
     resources :posts, only: [:index, :show] do
-      resources :comments, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy, :update]
     end
 
   end
