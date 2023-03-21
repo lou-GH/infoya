@@ -17,4 +17,8 @@ class Manufacturer < ApplicationRecord
   has_many :users, through: :relationships
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visiter_id', dependent: :destroy
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["account_name", "created_at", "email", "encrypted_password", "id", "introduction", "is_deleted", "location_id", "prefecture", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at"]
+  end
+
 end

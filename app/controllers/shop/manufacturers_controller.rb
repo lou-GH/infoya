@@ -1,4 +1,6 @@
 class Shop::ManufacturersController < ApplicationController
+  before_action :set_manufacturer,only: %i[edit update]
+
   def unsubscribe
     @manufacturer = current_manufacturer
   end
@@ -29,5 +31,15 @@ class Shop::ManufacturersController < ApplicationController
       render :edit
     end
   end
+
+private
+
+    def set_manufacturer
+        @manufacturer = Manufacturer.find(current_manufacturer.id)
+    end
+
+    def manufacturer_params
+        params.require(:manufacturer).permit(:email,:account_name,:introduction,:prefecture)
+    end
 
 end

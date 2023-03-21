@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
 
   belongs_to :manufacturer
+  belongs_to :location
 
   has_one_attached :post_image
 
@@ -10,7 +11,8 @@ class Post < ApplicationRecord
   #   Post.genresとすれば、Postに紐付けられたTagの取得が可能
   has_many :genres, through: :genre_tags
   has_many :comments, dependent: :destroy
-  has_many :comment_users, through: :comments, source: :manufacturer
+  has_many :comment_manufacturers, through: :comments, source: :manufacturer
+  has_many :comment_users, through: :comments, source: :user
   has_many :notifications, dependent: :destroy
 
 

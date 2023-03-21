@@ -69,13 +69,7 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
     @post_genres = @post.genres
     @comments = @post.comments
     @comment = Comment.new
-    # @location = Locations.find(params[:post][:location_id])
-    # @post.location_prefecture = @location.prefecture
-    # @post.location_name = @location.name
-    # @post.location_postal_code = @location.postal_code
-    # @post.location_address = @location.address
-    # @post.location_locaｗｑ２ｗ３post.location_locaｗｑ２ｗ３tion_image = @location.location_location_image
-    # @post.location_introduction = @location.introduction
+
   end
 
   def destroy

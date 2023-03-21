@@ -7,32 +7,35 @@
   <% end %>
 </div>
 
-コメント
-<table>
+コメント一覧
 
-  <% post.comments.each do |comment| %>
-  <tr>
-    <td>
-      <% if comment.manufacturer.manufacturer_icon.attached? %>
-        <%= image_tag comment.manufacturer.manufacturer_icon  %><br>
-      <%end%>
-      <%=link_to shop_manufacurer_path(comment.manufacturer.id) do %>
-        <%= comment.manufacurer.name %>
+
+<% post.comments.each do |comment| %>
+<ul class="list-group list-group-horizontal">
+  <li class="list-group-item" style="col-2">
+      <%# if comment.manufacturer.manufacturer_icon.attached? %>
+        <%#= image_tag comment.manufacturer.manufacturer_icon, class: 'index-icon-img' %><br>
+      <%# elsif comment.user.user_icon.attached? %>
+        <%#= image_tag comment.user.user_icon, class: 'index-icon-img' %><br>
+      <%# else %>
+        <%#= image_tag 'no_image.jpg', class: 'index-icon-img' %>
+      <%# end %>
+      <%#=link_to shop_manufacurer_path(comment.manufacturer.id) do %>
+      <% if comment.manufacturer %>
+        <%= comment.manufacturer.account_name %>
+      <% else comment.user %>
+        <%= comment.user.account_name %>
       <% end %>
-    </td>
+  </li>
 
-    <td>
-      <%= comment.comment %>
-    </td>
-
-    <% if comment.manufacurer == current_manufacturer %>
-      <td>
-        <%= link_to "削除", shop_post_comment_path(comment.post, comment), method: :delete,remote: true,class:"btn btn-danger" %>
-      </td>
+  <li class="list-group-item" style="col-8">
+    <%= comment.comment %><br>
+    <% if comment.manufacturer == current_manufacturer %>
+      <%= link_to "削除", shop_post_comment_path(comment.post, comment), method: :delete, data: { confirm: "本当にコメントを削除しますか？" },class:"btn btn-danger" %>
     <% end %>
-  </tr>
-  <% end %>
 
-</table>
+  </li>
+</ul>
+<% end %>
 
 

@@ -6,7 +6,11 @@ class Public::ManufacturersController < ApplicationController
   end
 
   def index
-    @manufacturers = Manufacturer.all
+    # @manufacturers = Manufacturer.all
+    # 検索オブジェクト
+    @search = Manufacturer.ransack(params[:q])
+    # 検索結果
+    @manufacturers = @search.result.page(params[:page]).per(20)
   end
 
 end

@@ -17,13 +17,13 @@
       <% @post_genres.each do |genre| %>
         <%#= link_to genre.genre_name  %>
 
-        <%= link_to shop_genre_posts_path(genre_id: genre.id) do %>
+        <%#= link_to shop_genre_posts_path(genre_id: genre.id) do %>
           <%= "#{genre.genre_name}(#{genre.posts.count})" %>
-        <% end %>
+        <%# end %>
       <% end %>
 
       <br>
-      <%= link_to "削除",shop_post_path(@post.id),method: :delete, data: { confilm: "本当に投稿を削除しますか？" },class:'btn btn-danger' %>
+      <%= link_to "削除",shop_post_path(@post.id),method: :delete, data: { confirm: "本当に投稿を削除しますか？" },class:'btn btn-danger' %>
 
       <br>
 

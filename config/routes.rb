@@ -25,10 +25,10 @@ Rails.application.routes.draw do
 
   namespace :shop do
     get 'manufacturers/unsubscribe'
-    get 'manufacturers/withdraw'
+    patch 'manufacturers/withdraw'
     get 'manufacturers/my_page', to: 'manufacturers#show'
     get 'manufacturers/information/edit', to: 'manufacturers#edit'
-    get 'manufacturers/information', to: 'manufacturers#update'
+    patch 'manufacturers/information/edit', to: 'manufacturers#update'
 
     resources :locations, only: [:edit, :create, :update, :destroy]
     resources :posts, only: [:index, :new, :show, :create, :destroy, :update] do
@@ -46,10 +46,10 @@ Rails.application.routes.draw do
 
   namespace :public do
     get 'users/unsubscribe'
-    get 'users/withdraw'
+    patch 'users/withdraw'
     get 'users/my_page', to: 'users#show'
     get 'users/information/edit', to: 'users#edit'
-    get 'users/information', to: 'users#update'
+    patch 'users/information/edit', to: 'users#update'
 
     resource :relationships, only: [:create, :destroy]
     get 'users/:id/followings' => 'relationships#followings', as: 'followings'

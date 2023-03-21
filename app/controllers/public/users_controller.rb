@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :set_user,only: %i[edit update]
 
   def unsubscribe
     @user = current_user
@@ -29,5 +30,15 @@ class Public::UsersController < ApplicationController
       render :edit
     end
   end
+
+private
+
+    def set_user
+        @user = User.find(current_user.id)
+    end
+
+    def user_params
+        params.require(:user).permit(:email,:account_name,:introduction,:prefecture)
+    end
 
 end

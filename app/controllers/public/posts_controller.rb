@@ -10,14 +10,19 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @genre_list = Genre.all
+    # @genre_list = Genre.all
     @user = current_user
     @manufacturers = Manufacturer.all
     @posts = Post.all
-    @post = Post.find(params[:id])
-    @manufacturer = @post.manufacturer
+    # @post = Post.find(params[:id])
+    # @manufacturer = @post.manufacturer
     # @genre_list = @posts.genres
     # @post_genres = @post.genres
+
+    # 検索オブジェクト
+    @search = Genre.ransack(params[:q])
+    # 検索結果
+    @genres = @search.result.page(params[:page]).per(20)
   end
 
 private

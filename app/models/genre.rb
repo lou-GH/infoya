@@ -9,5 +9,8 @@ class Genre < ApplicationRecord
 
   validates :genre_name, uniqueness: true
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "genre_name", "id", "updated_at"]
+  end
 
 end

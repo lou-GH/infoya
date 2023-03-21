@@ -8,12 +8,12 @@
 
     <% if @post.errors.any? %>
       <%= @post.errors.count %>errors prohibited this obj from being saved:
-        <ul>
-          <% @post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-      　  <% end %>
-        </ul>
-      <% end %>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
 
     <%= form_with model: @post, url: shop_posts_path, method: :post do |f| %>
 

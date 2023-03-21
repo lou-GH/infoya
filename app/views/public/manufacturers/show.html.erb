@@ -46,25 +46,25 @@
           <div class="card">
             <div class="card-header">
               <small>
-                No. <%= @manufacturer.location.id %>
+                No. <%= location.id %>
               </small>
             </div>
-            <%= image_tag @manufacturer.location.location_image, class: 'my-page-card-img' %>
+            <%= image_tag location.location_image, class: 'my-page-card-img' %>
             <div class="card-body">
               <div class="card-text">
-                <h5><%= @manufacturer.location.name %></h5>
+                <h5><%= location.name %></h5>
                 <div>
                   <div>
-                    <%= @manufacturer.location.introduction %>
+                    <%= location.introduction %>
                   </div>
                   <div>
-                    〒<%= @manufacturer.location.postal_code %>
+                    〒<%= location.postal_code %>
                   </div>
                   <div>
-                    <%= @manufacturer.location.prefecture %>
+                    <%= location.prefecture %>
                   </div>
                   <div>
-                    <%= @manufacturer.location.address %>
+                    <%= location.address %>
                   </div>
                 </div>
               </div>
