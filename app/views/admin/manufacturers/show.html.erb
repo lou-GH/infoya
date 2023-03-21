@@ -1,0 +1,47 @@
+<div class="container px-5 px-sm-0">
+  <h2>生産者の詳細</h2>
+
+  <div class="row">
+
+    <div class="col-md-2">
+      <div class="lead font-weight-bold">生産者登録情報</div>
+    </div>
+
+  </div>
+
+  <div class="my-3">
+    <div class="d-block d-md-flex">
+      <div class="mr-5">
+        <% if @manufacturer.manufacturer_icon.attached? %>
+          <%= image_tag @manufacturer.manufacturer_icon, class: 'profile-icon-img' %>
+        <% else %>
+          <%= image_tag 'no_image.jpg', class: 'profile-icon-img' %>
+        <% end %>
+      </div>
+      <div>
+        <h4><%= @manufacturer.account_name %></h4>
+        <small class="text-black-50">
+          <%= @manufacturer.email %>
+        </small>
+      </div>
+    </div>
+
+    <% if @manufacturer.introduction.present? %>
+      <hr>
+      <%= simple_format(@manufacturer.introduction) %>
+      <hr>
+    <% end %>
+  </div>
+
+
+  <div class="mb-3">
+    <h5>
+      登録地の主な都道府県 : <%= @manufacturer.prefecture.blank? ? '未登録' : @manufacturer.prefecture %>
+    </h5>
+  </div>
+
+  <%= link_to admin_manufacturers_withdraw_path, method: :patch, data: { confirm: "本当に退会させますか？" } do %>
+    <button type="button" class="btn btn-danger">退会させる</button>
+  <% end %>
+
+</div>

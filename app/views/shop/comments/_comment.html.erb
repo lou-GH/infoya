@@ -13,14 +13,20 @@
 <% post.comments.each do |comment| %>
 <ul class="list-group list-group-horizontal">
   <li class="list-group-item" style="col-2">
-      <%# if comment.manufacturer.manufacturer_icon.attached? %>
-        <%#= image_tag comment.manufacturer.manufacturer_icon, class: 'index-icon-img' %><br>
-      <%# elsif comment.user.user_icon.attached? %>
-        <%#= image_tag comment.user.user_icon, class: 'index-icon-img' %><br>
-      <%# else %>
-        <%#= image_tag 'no_image.jpg', class: 'index-icon-img' %>
-      <%# end %>
-      <%#=link_to shop_manufacurer_path(comment.manufacturer.id) do %>
+      <% if comment.manufacturer %>
+        <% if comment.manufacturer.manufacturer_icon.attached? %>
+          <%= image_tag comment.manufacturer.manufacturer_icon, class: 'index-icon-img' %><br>
+        <% else %>
+          <%= image_tag 'no_image.jpg', class: 'index-icon-img' %>
+        <% end %>
+      <% else comment.user %>
+        <% if comment.user.user_icon.attached? %>
+          <%= image_tag comment.user.user_icon, class: 'index-icon-img' %><br>
+        <% else %>
+          <%= image_tag 'no_image.jpg', class: 'index-icon-img' %>
+        <% end %>
+      <% end %>
+
       <% if comment.manufacturer %>
         <%= comment.manufacturer.account_name %>
       <% else comment.user %>

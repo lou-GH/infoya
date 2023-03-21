@@ -1,11 +1,3 @@
-<div class="form-group">
-  <label for="newcomment">コメントする</label>
-
-  <%= form_with(url: public_post_comments_path(@post), method: :post, local: true) do |f| %>
-    <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力",class:"form-control" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-</div>
 
 コメント一覧
 <% post.comments.each do |comment| %>
@@ -34,9 +26,7 @@
 
   <li class="list-group-item" style="col-8">
     <%= comment.comment %><br>
-    <% if comment.user == current_user %>
-      <%= link_to "削除", public_post_comment_path(comment.post, comment), method: :delete, data: { confirm: "本当にコメントを削除しますか？" },class:"btn btn-danger" %>
-    <% end %>
+    <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete, data: { confirm: "本当にコメントを削除しますか？" },class:"btn btn-danger" %>
 
   </li>
 </ul>

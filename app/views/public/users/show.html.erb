@@ -18,9 +18,9 @@
     <div class="d-block d-md-flex">
       <div class="mr-5">
         <% if current_user.user_icon.attached? %>
-          <%= imgae_tag current_user.user_icon %>
+          <%= image_tag current_user.user_icon, class: 'profile-icon-img' %>
         <% else %>
-          <%= image_tag 'no_image.jpg', class: 'profile-manufacturer_icon-img' %>
+          <%= image_tag 'no_image.jpg', class: 'profile-icon-img' %>
         <% end %>
       </div>
       <div>

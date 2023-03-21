@@ -9,9 +9,9 @@
     <div class="d-block d-md-flex">
       <div class="mr-5">
         <% if @manufacturer.manufacturer_icon.attached? %>
-          <%= imgae_tag manufacturer.manufacturer_icon %>
+          <%= image_tag @manufacturer.manufacturer_icon, class: 'profile-icon-img' %>
         <% else %>
-          <%= image_tag 'no_image.jpg', class: 'profile-manufacturer_icon-img' %>
+          <%= image_tag 'no_image.jpg', class: 'profile-icon-img' %>
         <% end %>
       </div>
       <div>
@@ -19,7 +19,7 @@
         <% if current_user.following?(@manufacturer) %>
           <%= link_to "フォロー外す", public_relationships_path(manufacturer_id: @manufacturer.id), method: :delete, class: "btn btn-primary" %>
         <% else %>
-          <%= link_to "フォローする", public_relationships_path(manufacturer_id: @manufacturer.id), method: :post, class: "btn btn-denger" %>
+          <%= link_to "フォローする", public_relationships_path(manufacturer_id: @manufacturer.id), method: :post, class: "btn btn-outline-primary" %>
         <% end %>
       </div>
     </div>

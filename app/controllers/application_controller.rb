@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource_or_scope)
     if resource_or_scope.is_a?(Admin)
-        admin_root_path
+        admin_posts_path
     elsif resource_or_scope.is_a?(User)
         public_followings_path(resource_or_scope)
     elsif resource_or_scope.is_a?(Manufacturer)

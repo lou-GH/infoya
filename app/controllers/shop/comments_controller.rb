@@ -6,7 +6,7 @@ class Shop::CommentsController < ApplicationController
     if comment.save
       @post = Post.find(params[:post_id])
       @comment = Comment.new
-      @post.create_notification_by(current_manufacturer)
+      # @post.create_notification_by(current_manufacturer)
       flash[:notice] = "コメントしました。"
       redirect_to shop_post_path(@post)
     else

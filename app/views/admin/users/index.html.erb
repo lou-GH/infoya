@@ -1,11 +1,11 @@
 <div class="container px-5 px-sm-0">
-  <%= render 'search', q: @search, url: public_manufacturers_path %>
+  <%= render 'search', q: @search, url: admin_users_path %>
 
   <div class="row">
     <div class="col-md-8 offset-md-1">
-      <h1>生産者一覧</h1>
+      <h1>ユーザー一覧</h1>
 
-      <ul class="manufacturers">
+      <ul class="users">
         <table class = "table">
           <thead>
             <tr>
@@ -16,19 +16,19 @@
             </tr>
           </thead>
 
-          <% @manufacturers.each do |manufacturer| %>
+          <% @users.each do |user| %>
           <tbody>
             <tr>
               <td>
-                <% if manufacturer.manufacturer_icon.attached? %>
-                  <%= image_tag manufacturer.manufacturer_icon, class: 'profile-icon-img' %>
+                <% if user.user_icon.attached? %>
+                  <%= image_tag user.user_icon, class: 'profile-icon-img' %>
                 <% else %>
                   <%= image_tag 'no_image.jpg', class: 'profile-icon-img' %>
                 <% end %>
               </td>
-              <td><%= manufacturer.account_name %></td>
-              <td><%= manufacturer.prefecture %></td>
-              <td><%= link_to "詳細", public_manufacturer_path(manufacturer) %></td>
+              <td><%= user.account_name %></td>
+              <td><%= user.prefecture %></td>
+              <td><%= link_to "詳細", admin_user_path(user) %></td>
             </tr>
           </tbody>
           <% end %>

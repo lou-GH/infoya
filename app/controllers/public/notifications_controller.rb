@@ -4,7 +4,7 @@ class Public::NotificationsController < ApplicationController
     @notifications = current_user.passive_notifications
     # .(params[:page]).per(20)
     @notifications.where(checked: false).each do |notification|
-      notification.update_attributes(checked: true)
+      notification.update(checked: true)
     end
   end
 

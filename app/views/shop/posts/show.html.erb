@@ -14,13 +14,13 @@
     <div class="col-xs-11 col-lg-5">
       <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %><br>
       <%= @post.introduction %><br>
-      <% @post_genres.each do |genre| %>
-        <%#= link_to genre.genre_name  %>
+      登録地：<%= @post.location.name %><br>
 
-        <%#= link_to shop_genre_posts_path(genre_id: genre.id) do %>
-          <%= "#{genre.genre_name}(#{genre.posts.count})" %>
-        <%# end %>
+      タ　グ：
+      <% @post_genres.each do |genre| %>
+        <%= genre.genre_name %>
       <% end %>
+
 
       <br>
       <%= link_to "削除",shop_post_path(@post.id),method: :delete, data: { confirm: "本当に投稿を削除しますか？" },class:'btn btn-danger' %>

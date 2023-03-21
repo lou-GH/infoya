@@ -39,7 +39,7 @@ private
     end
 
     def manufacturer_params
-        params.require(:manufacturer).permit(:email,:account_name,:introduction,:prefecture)
+        params.require(:manufacturer).permit(:email,:account_name,:introduction,:prefecture,:manufacturer_icon)
     end
 
 end

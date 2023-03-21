@@ -1,0 +1,29 @@
+<div class="container px-5 px-sm-0">
+  <%= render 'search', q: @search, url: public_posts_path %>
+
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+
+          <%= link_to admin_post_path(post.id) do %>
+            <div class="col-md-4">
+              <div class="post_image_index">
+                <%= image_tag post.post_image, class: "post_image_index" %>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <p class="card-text">
+                  <%= post.introduction %>
+                </p>
+                <p class="card-text"><small class="text-muted"><%= post.created_at.strftime('%Y/%m/%d %H:%M') %></small></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

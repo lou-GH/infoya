@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   # 管理者用
   # URL /admin/sign_in
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin, skip: [:passwords] ,controllers: {
   sessions: "admin/sessions"
   }
   #生産者用
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   }
 
   root 'home#top'
-  get 'home/about'
+  # get 'home/about'
   get 'home/sign_up'
   get 'home/sign_in'
 
@@ -71,10 +71,14 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :posts, only: [:index, :show] do
+    resources :posts, only: [:index, :show, :destroy] do
       resources :comments, only: [:destroy]
     end
     resources :genres, only: [:index, :destroy]
+    patch 'manufacturers/withdraw'
+    resources :manufacturers, only: [:index, :show]
+    patch 'users/withdraw'
+    resources :users, only: [:index, :show]
   end
 
 end

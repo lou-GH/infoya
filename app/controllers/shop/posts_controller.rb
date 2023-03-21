@@ -59,8 +59,6 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
       render :new
     end
 
-
-
   end
 
   def show
@@ -97,7 +95,7 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
   end
 
   def comment_params
-    params.require(:comment).permit(:comment).merge.(manufacturer_id: current_manufacturer.id)
+    params.permit(:comment).merge(post_id: params[:post_id])
   end
 
 end

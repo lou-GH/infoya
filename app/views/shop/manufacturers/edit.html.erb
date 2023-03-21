@@ -8,39 +8,77 @@
 <%= form_with model: @manufacturer, url: shop_manufacturers_information_edit_path, local: :true do |f| %>
 
 <div class="container px-5 px-sm-0">
-<h2>生産者情報編集</h2>
 
-<p>生産者アイコン</p>
-<label for="inputManufacturerIcon"></label>
-<%= f.file_field :manufacturer_icon, autofocus: true, id:"inputManufacturerIcon" %>
+    <h2>生産者情報編集</h2>
 
-<p>生産者アカウント名</p>
-<label for="inputAccountName"></label>
-<%= f.text_field :account_name, autofocus: true, id:"inputAccountName",　placeholder: "いんふぉ屋" %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="inputManufacturerIcon">生産者アイコン</label>
+        </div>
+        <div class="col-md-5">
+          <%= f.file_field :manufacturer_icon, id:"inputManufacturerIcon" %>
+        </div>
+      </div>
+    </div>
 
-<p>生産者説明文</p>
-<label for="inputIntroduction"></label>
-<%= f.text_field :introduction, autofocus: true, id:"inputIntroduction", placeholder: "〇〇を生産している農家です。～" %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="inputAccountName">生産者アカウント名</label>
+        </div>
+        <div class="col-md-5">
+          <%= f.text_field :account_name, autofocus: true, class: 'form-control', id:"inputAccountName",　placeholder: "いんふぉ屋" %>
+        </div>
+      </div>
+    </div>
 
-<p>メールアドレス</p>
-<label for="inputEmail"></label>
-<%= f.text_field :email, autofocus: true, id:"inputEmail", placeholder: "sample@example.com" %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="inputIntroduction">生産者説明文</label>
+        </div>
+        <div class="col-md-5">
+          <%= f.text_field :introduction, id:"inputIntroduction", class: 'form-control', rows: 5, placeholder: "〇〇を生産している農家です。～" %>
+        </div>
+      </div>
+    </div>
 
-<p>登録地の主な都道府県</p>
-<label for="inputPrefecture"></label>
-<%= f.collection_select :prefecture, JpPrefecture::Prefecture.all, :name, :name, { include_blank: '都道府県' }, { class: 'custom-select' } %>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="inputEmail">メールアドレス</label>
+        </div>
+        <div class="col-md-5">
+          <%= f.text_field :email, class: 'form-control', id:"inputEmail", placeholder: "sample@example.com" %>
+        </div>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-md-3 offset-md-1">
-    <button type="submit" class="btn btn-success">編集内容を保存</button>
-  </div>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="inputPrefecture">登録地の主な都道府県</label>
+        </div>
+        <div class="col-md-5">
+          <%= f.collection_select :prefecture, JpPrefecture::Prefecture.all, :name, :name, { include_blank: '都道府県' }, { class: 'form-control' } %>
+        </div>
+      </div>
+    </div>
 
-    <% end %>
+    <div class="row">
+      <div class="col-md-3 offset-md-1">
+        <button type="submit" class="btn btn-success">編集内容を保存</button>
+      </div>
 
-  <div class="col-md-3 offset-md-2">
-    <%= link_to shop_manufacturers_unsubscribe_path do %>
-      <button type="button" class="btn btn-danger">退会する</button>
-    <% end %>
-  </div>
-</div>
+        <% end %>
+<br>
+<br>
+      <div class="col-md-3 offset-md-2">
+        <%= link_to shop_manufacturers_unsubscribe_path do %>
+          <button type="button" class="btn btn-danger">退会する</button>
+        <% end %>
+      </div>
+    </div>
+
 </div>
