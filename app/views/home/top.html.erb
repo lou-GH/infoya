@@ -23,8 +23,9 @@
       　新規登録
       <% end %>
 
-
-      ゲストログイン
+      <%= link_to public_guest_sign_in_path, method: :post, class: "login" do %>
+        ゲストログイン（閲覧用）
+      <% end %>
     </div>
   </div>
 </div>

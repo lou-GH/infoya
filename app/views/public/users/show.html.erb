@@ -8,8 +8,11 @@
     </div>
 
     <div class="col-md-3">
-      <%= link_to public_users_information_edit_path do %>
-        <button type="button" class="btn btn-success">編集する</button>
+      <% if current_user.account_name == "ゲスト" %>
+      <% else %>
+        <%= link_to public_users_information_edit_path do %>
+          <button type="button" class="btn btn-success">編集する</button>
+        <% end %>
       <% end %>
     </div>
   </div>

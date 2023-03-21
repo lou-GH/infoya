@@ -39,5 +39,14 @@ class User < ApplicationRecord
     ["account_name", "created_at", "email", "encrypted_password", "id", "introduction", "is_deleted", "prefecture", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at"]
   end
 
+  # ゲストログインについて
+  def self.guest
+    find_or_create_by!(email: 'aaa@aaa.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.password_confirmation = user.password
+      user.account_name = 'ゲスト'
+      user.prefecture = '東京都'
+    end
+  end
 
 end
