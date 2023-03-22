@@ -14,18 +14,23 @@
 
 
 
+      <div class="col-md">
+        <%= link_to home_sign_in_path do %>
+        　<button type="button" class="btn btn-outline-primary btn-block">ログイン</button>
+        <% end %><br>
+      </div>
 
-      <%= link_to home_sign_in_path do %>
-      　ログイン
-      <% end %>
-
-      <%= link_to home_sign_up_path do %>
-      　新規登録
-      <% end %>
-
-      <%= link_to public_guest_sign_in_path, method: :post, class: "login" do %>
-        ゲストログイン（閲覧用）
-      <% end %>
+      <div class="col-md">
+        <%= link_to home_sign_up_path do %>
+        　<button type="button" class="btn btn-outline-primary btn-block">新規登録</button>
+        <% end %><br>
+      </div>
+      <br>
+      <div class="col-md">
+        <%= link_to public_guest_sign_in_path, method: :post, class: "login" do %>
+          <button type="button" class="btn btn-outline-secondary btn-block">ゲストログイン（閲覧用）</button>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
