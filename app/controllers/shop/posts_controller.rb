@@ -3,18 +3,18 @@ class Shop::PostsController < ApplicationController
 before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
 
   def search
-    @genre_list = Genre.all
+    @genre_list = Genre.all.order(created_at: :desc)
     @genre = Genre.find(params[:ganre_id])
-    @posts = @genre.posts.all
+    @posts = @genre.posts.all.order(created_at: :desc)
     # /shop/genres/:genre_id/posts(.:format)
   end
 
   def index
-    @genre_list = Genre.all
+    @genre_list = Genre.all.order(created_at: :desc)
     # @posts = Post.all
     # @post = Post.new
     @manufacturer = current_manufacturer
-    @posts = @manufacturer.posts
+    @posts = @manufacturer.posts.order(created_at: :desc)
     # @post = Post.find(params[:id])
     # @manufacturer = @post.manufacturer
     # @genre_list = @posts.genres
@@ -54,7 +54,7 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
     else
       # @posts = Post.all
       @manufacturer = current_manufacturer
-      @posts = @manufacturer.posts
+      @posts = @manufacturer.posts.order(created_at: :desc)
       # 失敗した場合は、newへ戻る
       render :new
     end
@@ -73,10 +73,10 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy
-      @posts = Post.all
+      @posts = Post.all.order(created_at: :desc)
       redirect_to shop_posts_path, flash: {danger: "投稿を削除しました"}
     else
-      @posts = Post.all
+      @posts = Post.all.order(created_at: :desc)
       render :index
     end
   end

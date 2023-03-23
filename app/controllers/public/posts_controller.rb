@@ -13,7 +13,7 @@ class Public::PostsController < ApplicationController
     # @genre_list = Genre.all
     @user = current_user
     @manufacturers = Manufacturer.all
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc)
     # @post = Post.find(params[:id])
     # @manufacturer = @post.manufacturer
     # @genre_list = @posts.genres

@@ -1,8 +1,8 @@
 class Admin::PostsController < ApplicationController
 
   def index
-    @genre_list = Genre.all
-    @posts = Post.all
+    @genre_list = Genre.all.order(created_at: :desc)
+    @posts = Post.all.order(created_at: :desc)
     # @post = Post.new
     # @manufacturer = manufacturer
     # @manufacturer = @post.manufacturer
@@ -28,7 +28,7 @@ class Admin::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy
-      @posts = Post.all
+      @posts = Post.all.order(created_at: :desc)
       redirect_to admin_posts_path, flash: {danger: "投稿を削除しました"}
     else
       @posts = Post.all
