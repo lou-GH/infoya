@@ -21,4 +21,12 @@ class Manufacturer < ApplicationRecord
     ["account_name", "created_at", "email", "encrypted_password", "id", "introduction", "is_deleted", "location_id", "prefecture", "remember_created_at", "reset_password_sent_at", "reset_password_token", "updated_at"]
   end
 
+  def manufacturer_status
+    if is_deleted
+      "退会"
+    else
+      "有効"
+    end
+  end
+
 end

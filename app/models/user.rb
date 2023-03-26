@@ -49,4 +49,12 @@ class User < ApplicationRecord
     end
   end
 
+  def user_status
+    if is_deleted
+      "退会"
+    else
+      "有効"
+    end
+  end
+
 end

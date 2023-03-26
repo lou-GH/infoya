@@ -78,10 +78,8 @@ Rails.application.routes.draw do
       resources :comments, only: [:destroy]
     end
     resources :genres, only: [:index, :destroy]
-    patch 'manufacturers/withdraw'
-    resources :manufacturers, only: [:index, :show]
-    patch 'users/withdraw'
-    resources :users, only: [:index, :show]
+    resources :manufacturers, only: [:index, :show, :update]
+    resources :users, only: [:index, :show, :update]
   end
 
 end

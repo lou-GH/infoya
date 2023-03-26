@@ -1,8 +1,17 @@
+<div class="container px-5 px-sm-0">
+  <div class="align-items-center">
+    <div class="row justify-content-center">
 
-<%= link_to new_manufacturer_registration_path do %>
-　<button type="button" class="btn btn-info btn-lg">生産者 新規登録</button>
-<% end %>
+      <div>
+        <%= link_to new_manufacturer_registration_path do %>
+        　<button type="button" class="btn btn-info btn-lg">生産者 新規登録</button>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to new_user_registration_path do %>
+        　<button type="button" class="btn btn-warning btn-lg">購入者 新規登録</button>
+        <% end %>
+      </div>
 
-<%= link_to new_user_registration_path do %>
-　<button type="button" class="btn btn-warning btn-lg">購入者 新規登録</button>
-<% end %>
+    </div>
+  </div>
