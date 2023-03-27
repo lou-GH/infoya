@@ -16,7 +16,7 @@ class GenreTag < ApplicationRecord
   # end
 
 
-  # def save(genre_list)
+  # def save_genres(genre_list)
   #   post = Post.create(name: name)
   #   genre_list.each do |new_genre|
   #     post_genre = Genre.find_or_create_by(genrename: new_genre)

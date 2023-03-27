@@ -47,7 +47,7 @@
   </div>
 
   <% if @manufacturer.is_deleted %>
-    <button type="button" class="btn btn-danger">退会済み</button>
+    <button type="button" class="btn btn-outline-danger">退会済み</button>
   <% else %>
     <%= link_to admin_manufacturer_path, method: :patch, data: { confirm: "本当に退会させますか？" } do %>
       <button type="button" class="btn btn-danger">退会させる</button>

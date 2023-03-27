@@ -40,8 +40,18 @@
     </h5>
   </div>
 
-  <%= link_to admin_users_withdraw_path, method: :patch, data: { confirm: "本当に退会させますか？" } do %>
-    <button type="button" class="btn btn-danger">退会させる</button>
+ <div class="mb-3">
+    <h5>
+      ステータス : <%= @user.user_status %>
+    </h5>
+  </div>
+
+  <% if @user.is_deleted %>
+    <button type="button" class="btn btn-outline-danger">退会済み</button>
+  <% else %>
+    <%= link_to admin_user_user_path, method: :patch, data: { confirm: "本当に退会させますか？" } do %>
+      <button type="button" class="btn btn-danger">退会させる</button>
+    <% end %>
   <% end %>
 
 </div>

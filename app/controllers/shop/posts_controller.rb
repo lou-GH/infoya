@@ -27,10 +27,6 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
   end
 
   def create
-      # Rails.logger.info "**********【#{params.inspect}】**********"
-      # genre = Genre.new
-      # genre.genre_name = params[:genre_name]
-
     # パラメーターを受け取り保存準備
     @post = current_manufacturer.posts.new(post_params)
 
