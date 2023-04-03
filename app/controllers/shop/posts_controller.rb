@@ -14,7 +14,7 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
     # @posts = Post.all
     # @post = Post.new
     @manufacturer = current_manufacturer
-    @posts = @manufacturer.posts.order(created_at: :desc)
+    @posts = @manufacturer.posts.order(created_at: :desc).page(params[:page]).per(10)
     # @post = Post.find(params[:id])
     # @manufacturer = @post.manufacturer
     # @genre_list = @posts.genres
