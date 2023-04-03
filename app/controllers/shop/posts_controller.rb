@@ -32,12 +32,15 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
 
     @post.manufacturer_id = current_manufacturer.id
 
-    genre_list = params[:post][:genre_name].split(nil)
+    # genre_list = params[:post][:genre_name].split(nil)
 
     # Postを保存
     # if @post.valid?
     if @post.save
       # タグの保存
+      #
+      genre_list = genre_params[:genre_name].split(/[[:blank:]]+/).select(&:present?)
+      # @post.save_genres(params[:post][:genre])
       # @post.genre_tags.each do |genre|
       @post.save_genres(genre_list)
       # end
@@ -92,6 +95,11 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
 
   def comment_params
     params.permit(:comment).merge(post_id: params[:post_id])
+  end
+
+  # タグ用にストロングパラメータを設定して、文字列を受け取る
+  def genre_params
+    params.require(:post).permit(:genre_name)
   end
 
 end

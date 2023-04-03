@@ -21,40 +21,28 @@ class Post < ApplicationRecord
     length: { maximum: 200 }
   # validates :genre_name, presence: true
 
+# postコントローラで配列化した値を引数で受け取ります
   # def save_genre(sent_genres)
   def save_genres(genre_list)
-    # タグをスペース区切りで分割し配列にする
-    #   連続した空白も対応するので、最後の“+”がポイント
-    genre_list = genres.split(/[[:blank:]]+/)
-    # genre_list = genres.split(nil)
-    # genre_list = params[:post][:genre_name].split(nil)
-    # 自分自身に関連づいたタグを取得する
-    current_genres = self.genres.pluck(:genre_name) unless self.genres.nil?
-    # (1) 元々自分に紐付いていたタグと投稿されたタグの差分を抽出
-    #   -- 記事更新時に削除されたタグ
-    old_genres = current_genres - genre_list
-    # (2) 投稿されたタグと元々自分に紐付いていたタグの差分を抽出
-    #   -- 新規に追加されたタグ
-    new_genres = genre_list - current_genres
+   genre_list.each do |genre|
+      # 受け取った値を小文字に変換して、DBを検索して存在しない場合は
+      # find_genre に nil が代入され　nil となるのでタグの作成が始まる
+      unless find_genre = Genre.find_by(genre_name: genre.downcase)
+        begin
+          # create メソッドでタグの作成
+          # create! としているのは、保存が成功しても失敗してもオブジェクト
+          # を返してしまうため、例外を発生させたい
+          self.genres.create!(genre_name: genre)
 
-    p current_genres
-
-    # genre_tagsテーブルから、(1)のタグを削除
-    #   genresテーブルから該当のタグを探し出して削除する
-    old_genres.each do |old|
-      # genre_tagsテーブルにあるpost_idとgenre_idを削除
-      #   後続のfind_byでgenre_idを検索
-      self.genres.delete Genre.find_by(genre_name: old)
-    end
-
-    # genresテーブルから(2)のタグを探して、genre_tagsテーブルにgenre_idを追加する
-    new_genres.each do |new|
-      # 条件のレコードを初めの1件を取得し1件もなければ作成する
-      # find_or_create_by : https://railsdoc.com/page/find_or_create_by
-      new_post_genre = Genre.find_or_create_by(genre_name: new)
-      # genre_tagsテーブルにpost_idとgenre_idを保存
-      #   配列追加のようにレコードを渡すことで新規レコード作成が可能
-      self.genres << new_post_genre
+        # 例外が発生すると rescue 内の処理が走り nil となるので
+        # 値は保存されないで次の処理に進む
+        rescue
+          nil
+        end
+      else
+            # DB にタグが存在した場合、中間テーブルに投稿とタグを紐付けている
+        GenreTag.create!(post_id: self.id, genre_id: find_genre.id)
+      end
     end
   end
 
