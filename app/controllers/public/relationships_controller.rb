@@ -20,12 +20,6 @@ class Public::RelationshipsController < ApplicationController
   def followings
     user = User.find(params[:id])
     @manufacturers = user.manufacturers
-    # @manufacturer = @manufacturers.each do |manufacturer|
-    #               end
-    # @posts = @manufacturer.posts
-    
   end
-
-
 
 end

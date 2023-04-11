@@ -1,7 +1,6 @@
 class Shop::CommentsController < ApplicationController
 
   def create
-    # post = Post.find(params[:post_id])
     comment = current_manufacturer.comments.new(comment_params)
     if comment.save
       @post = Post.find(params[:post_id])
@@ -15,18 +14,6 @@ class Shop::CommentsController < ApplicationController
       render template: "shop/posts/show"
     end
   end
-
-  # def update
-  #   @post = Post.find(params[:post_id])
-  #   @comment = Comment.find(params[:id])
-  #   if @comment.update(comment_params)
-  #     flash[:success] = "Comment updated"
-  #     redirect_to @post
-  #   else
-  #     flash[:danger] = "Comment failed"
-  #     render template: "shop/posts/show"
-  #   end
-  # end
 
   def destroy
     Comment.find_by(id: params[:id], post_id: params[:post_id]).destroy

@@ -6,19 +6,12 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
     @genre_list = Genre.all.order(created_at: :desc)
     @genre = Genre.find(params[:ganre_id])
     @posts = @genre.posts.all.order(created_at: :desc)
-    # /shop/genres/:genre_id/posts(.:format)
   end
 
   def index
     @genre_list = Genre.all.order(created_at: :desc)
-    # @posts = Post.all
-    # @post = Post.new
     @manufacturer = current_manufacturer
     @posts = @manufacturer.posts.order(created_at: :desc).page(params[:page]).per(10)
-    # @post = Post.find(params[:id])
-    # @manufacturer = @post.manufacturer
-    # @genre_list = @posts.genres
-    # @post_genres = @post.genres
   end
 
   def new
@@ -29,29 +22,17 @@ before_action :correct_manufacturer ,only:[:edit, :update, :destroy]
   def create
     # パラメーターを受け取り保存準備
     @post = current_manufacturer.posts.new(post_params)
-
     @post.manufacturer_id = current_manufacturer.id
-
-    # genre_list = params[:post][:genre_name].split(nil)
-
     # Postを保存
-    # if @post.valid?
     if @post.save
       # タグの保存
-      #
       genre_list = genre_params[:genre_name].split(/[[:blank:]]+/).select(&:present?)
-      # @post.save_genres(params[:post][:genre])
-      # @post.genre_tags.each do |genre|
       @post.save_genres(genre_list)
-      # end
-      # @post.save_genre(genre_list)
-      # @post.save
       @post.create_notification_by(current_manufacturer)
       flash[:notice] = "投稿しました。"
       # 成功したら投稿詳細へリダイレクト
       redirect_to shop_posts_path
     else
-      # @posts = Post.all
       @manufacturer = current_manufacturer
       @posts = @manufacturer.posts.order(created_at: :desc)
       # 失敗した場合は、newへ戻る
