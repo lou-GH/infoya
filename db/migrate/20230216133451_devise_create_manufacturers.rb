@@ -32,7 +32,7 @@ class DeviseCreateManufacturers < ActiveRecord::Migration[6.1]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.references :location, foreign_key: true
+      # t.references :location, foreign_key: true
 
       t.string :account_name, null: false, default: ""
       t.string :introduction, default: ""
