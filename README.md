@@ -49,4 +49,4 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 使用検討中です
+- フリー素材ぱくたそ（www.pakutaso.com）

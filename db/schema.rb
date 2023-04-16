@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 2023_03_14_110150) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "location_id"
     t.string "account_name", default: "", null: false
     t.string "introduction", default: ""
     t.string "prefecture", default: ""
@@ -105,7 +104,6 @@ ActiveRecord::Schema.define(version: 2023_03_14_110150) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_manufacturers_on_email", unique: true
-    t.index ["location_id"], name: "index_manufacturers_on_location_id"
     t.index ["reset_password_token"], name: "index_manufacturers_on_reset_password_token", unique: true
   end
 
@@ -127,10 +125,6 @@ ActiveRecord::Schema.define(version: 2023_03_14_110150) do
     t.text "introduction", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["genre_tag_id"], name: "index_posts_on_genre_tag_id"
-    t.index ["location_id"], name: "index_posts_on_location_id"
-    t.index ["manufacturer_id"], name: "index_posts_on_manufacturer_id"
-    t.index ["notification_id"], name: "index_posts_on_notification_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -166,11 +160,6 @@ ActiveRecord::Schema.define(version: 2023_03_14_110150) do
   add_foreign_key "genre_tags", "genres"
   add_foreign_key "genre_tags", "posts"
   add_foreign_key "locations", "manufacturers"
-  add_foreign_key "manufacturers", "locations"
-  add_foreign_key "posts", "genre_tags"
-  add_foreign_key "posts", "locations"
-  add_foreign_key "posts", "manufacturers"
-  add_foreign_key "posts", "notifications"
   add_foreign_key "relationships", "manufacturers"
   add_foreign_key "relationships", "users"
 end
