@@ -21,7 +21,7 @@ User.create!(
   ]
 )
 
-manufacturers = Manufacturer.create!(
+Manufacturer.create!(
   [
     {email: 'daikon@example.com', account_name: 'Daikon-farmer', password: 'password', prefecture: '埼玉県', introduction: '大根とネギを育てています。' , manufacturer_icon: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-manufacturer1.jpg"), filename:"sample-manufacturer1.jpg")},
     {email: 'mikan@example.com', account_name: 'Kankitu-orchard', password: 'password', prefecture: '愛媛県', introduction: '柑橘系を育てています。だいたい８こ入り３００円くらいで販売しています。' , manufacturer_icon: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-manufacturer2.jpg"), filename:"sample-manufacturer2.jpg")},
