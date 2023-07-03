@@ -17,22 +17,16 @@
       <% elsif admin_signed_in? %>
       <% else %>
 
-        <div class="col-md">
-          <%= link_to home_sign_in_path do %>
-          　<button type="button" class="btn btn-outline-primary btn-block">ログイン</button>
-          <% end %><br>
+        <div class="col-md my-5">
+          <%= link_to 'ログイン', home_sign_in_path, class:"btn btn-outline-primary btn-block" %>
         </div>
 
-        <div class="col-md">
-          <%= link_to home_sign_up_path do %>
-          　<button type="button" class="btn btn-outline-primary btn-block">新規登録</button>
-          <% end %><br>
+        <div class="col-md  my-5">
+          <%= link_to '新規登録', home_sign_up_path, class:"btn btn-outline-primary btn-block" %>
         </div>
-        <br>
-        <div class="col-md">
-          <%= link_to public_guest_sign_in_path, method: :post, class: "login" do %>
-            <button type="button" class="btn btn-outline-secondary btn-block">ゲストログイン（閲覧用）</button>
-          <% end %>
+
+        <div class="col-md my-5">
+          <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post, class: "login btn btn-outline-secondary btn-block" %>
         </div>
 
       <% end %>

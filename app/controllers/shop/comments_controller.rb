@@ -11,8 +11,13 @@ class Shop::CommentsController < ApplicationController
     else
       @manufacturer = current_manufacturer
       @posts = @manufacturer.posts
-      render template: "shop/posts/show"
+      @post = Post.find(params[:post_id])
+      @post_genres = @post.genres
+      @comment = Comment.new
+      @error_comment = comment
+      render "shop/posts/show"
     end
+    
   end
 
   def destroy

@@ -16,7 +16,7 @@
           <%= image_tag 'no_image.jpg', class: 'index-icon-img' %>
         <% end %>
       <% end %>
-      <%#=link_to shop_manufacurer_path(comment.manufacturer.id) do %>
+
       <% if comment.manufacturer %>
         <%= comment.manufacturer.account_name %>
       <% else comment.user %>
@@ -26,6 +26,7 @@
 
   <li class="list-group-item" style="col-8">
     <%= comment.comment %><br>
+    <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %><br>
     <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete, data: { confirm: "本当にコメントを削除しますか？" },class:"btn btn-danger" %>
 
   </li>

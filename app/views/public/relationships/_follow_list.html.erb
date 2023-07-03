@@ -8,7 +8,11 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= manufacturer.account_name %></td>
+          <td>
+            <%= link_to public_manufacturer_path(manufacturer) do %>
+              <%= manufacturer.account_name %>
+            <% end %>
+            </td>
         </tr>
       </tbody>
     </table>

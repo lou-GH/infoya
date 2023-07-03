@@ -1,6 +1,19 @@
 <div class="form-group">
   <label for="newcomment">コメントする</label>
 
+  <% if @error_comment.present? %>
+    <div id="error_explanation">
+      <div class ="text-danger">
+        <%= @error_comment.errors.count %>件のエラーが発生しました。
+      </h2>
+      <ul>
+        <% @error_comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_with(url: public_post_comments_path(@post), method: :post, local: true) do |f| %>
     <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力",class:"form-control" %>
     <%= f.submit "送信する" %>
@@ -24,7 +37,7 @@
           <%= image_tag 'no_image.jpg', class: 'index-icon-img' %>
         <% end %>
       <% end %>
-      <%#=link_to shop_manufacurer_path(comment.manufacturer.id) do %>
+      
       <% if comment.manufacturer %>
         <%= comment.manufacturer.account_name %>
       <% else comment.user %>
@@ -34,6 +47,7 @@
 
   <li class="list-group-item" style="col-8">
     <%= comment.comment %><br>
+    <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %><br>
     <% if comment.user == current_user %>
       <%= link_to "削除", public_post_comment_path(comment.post, comment), method: :delete, data: { confirm: "本当にコメントを削除しますか？" },class:"btn btn-danger" %>
     <% end %>

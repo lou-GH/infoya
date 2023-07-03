@@ -1,9 +1,8 @@
 class Public::CommentsController < ApplicationController
 
   def create
-    # post = Post.find(params[:post_id])
+
     comment = current_user.comments.new(comment_params)
-    # comment.post_id = post.id
     if comment.save
       @post = Post.find(params[:post_id])
       @comment = Comment.new
@@ -11,12 +10,15 @@ class Public::CommentsController < ApplicationController
       flash[:notice] = "コメントしました。"
       redirect_to public_post_path(@post)
     else
-      @posts = Post.all
       @user = current_user
-      render template: "public/posts/show"
+      @posts = Post.all
+      @post = Post.find(params[:post_id])
+      @post_genres = @post.genres
+      @comment = Comment.new
+      @error_comment = comment
+      render "public/posts/show"
     end
 
-    # @post.create_notification_by(current_user)
   end
 
   def destroy

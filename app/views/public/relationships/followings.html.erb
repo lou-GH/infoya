@@ -20,7 +20,11 @@
                   <%= image_tag 'no_image.jpg', class: 'profile-icon-img' %>
                 <% end %>
               </td>
-              <td class="col-2"><%= manufacturer.account_name %></td>
+              <td class="col-2">
+                <%= link_to public_manufacturer_path(manufacturer) do %>
+                 <%= manufacturer.account_name %>
+                <% end %>
+              </td>
               <td class="col-8">
                 <% @posts = manufacturer.posts.order(created_at: :desc).limit(1) %>
                 <% @posts.each do |post| %>

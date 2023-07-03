@@ -6,6 +6,7 @@ class Admin::CommentsController < ApplicationController
   end
 
 private
+
   def comment_params
     params.permit(:comment).merge(post_id: params[:post_id])
     #form tagにてpost_idパラメータを送信して、コメントへpost_idを格納するようにする必要がある。URLを作るために。

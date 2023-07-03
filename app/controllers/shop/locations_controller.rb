@@ -9,14 +9,13 @@ class Shop::LocationsController < ApplicationController
     @location.manufacturer_id = current_manufacturer.id
     if @location.save
       flash[:notice] = "Location was successfully created."
-      @locations = current_manufacturer.locations
       # マイページへ
       redirect_to shop_manufacturers_my_page_path
     else
       @location = Location.new
       @locations = current_manufacturer.locations
       # マイページへ
-      render template: "shop/manufacturers/show"
+      render "shop/manufacturers/show"
     end
   end
 
@@ -24,7 +23,6 @@ class Shop::LocationsController < ApplicationController
     @location = Location.find(params[:id])
     if @location.update(location_params)
       flash[:notice] = "Location  was successfully updated."
-      @locations = current_manufacturer.locations
       # マイページへ
       redirect_to shop_manufacturers_my_page_path
     else
@@ -38,7 +36,6 @@ class Shop::LocationsController < ApplicationController
     @location = Location.find(params[:id])
     if @location.destroy
       flash[:notice] = "Location  was successfully destroyed."
-      @locations = current_manufacturer.locations
       # マイページへ
       redirect_to root_path
     else
